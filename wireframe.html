@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VAIZO - Wireframe</title>
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+      background: #ffffff;
+      color: #111111;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; }
+
+    /* ========== UTILITY ========== */
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 100px 0; }
+    .section-dark { background: #111; color: #fff; }
+    .section-gray { background: #f5f5f5; }
+    .text-center { text-align: center; }
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 8px;
+    }
+    .section-dark .section-label { color: #666; }
+    .section-title {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      margin-bottom: 20px;
+    }
+    .section-desc {
+      font-size: 16px;
+      color: #666;
+      max-width: 640px;
+      margin: 0 auto 48px;
+    }
+    .section-dark .section-desc { color: #999; }
+
+    /* ========== BUTTONS ========== */
+    .btn {
+      display: inline-block;
+      padding: 16px 40px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: #111; color: #fff; }
+    .btn-primary:hover { background: #333; }
+    .btn-outline { background: transparent; color: #111; border: 2px solid #111; }
+    .btn-outline:hover { background: #111; color: #fff; }
+    .btn-white { background: #fff; color: #111; }
+    .btn-white:hover { background: #eee; }
+    .btn-white-outline { background: transparent; color: #fff; border: 2px solid #fff; }
+    .btn-white-outline:hover { background: #fff; color: #111; }
+    .btn-group { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    /* ========== HEADER ========== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #eee;
+    }
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+    }
+    .nav { display: flex; gap: 32px; align-items: center; }
+    .nav a {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #555;
+      transition: color 0.2s;
+    }
+    .nav a:hover { color: #111; }
+    .nav .btn { padding: 10px 24px; font-size: 13px; }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 180px 0 120px;
+      background: #111;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+    .hero .container { position: relative; z-index: 1; }
+    .hero-label {
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: #888;
+      margin-bottom: 24px;
+      display: block;
+    }
+    .hero-title {
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      max-width: 700px;
+    }
+    .hero-title span { display: block; font-size: 22px; font-weight: 400; color: #aaa; margin-top: 12px; letter-spacing: 0; }
+    .hero-desc {
+      font-size: 17px;
+      color: #999;
+      max-width: 560px;
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-stat-num { font-size: 36px; font-weight: 800; }
+    .hero-stat-label { font-size: 12px; color: #888; margin-top: 4px; }
+
+    /* ========== PROBLEM ========== */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .problem-card {
+      border: 1px solid #eee;
+      padding: 32px;
+    }
+    .problem-card-num {
+      font-size: 48px;
+      font-weight: 900;
+      color: #eee;
+      margin-bottom: 16px;
+    }
+    .problem-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+    .problem-card p { font-size: 14px; color: #666; line-height: 1.7; }
+
+    /* ========== SERVICES ========== */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .service-card {
+      border: 1px solid #eee;
+      padding: 48px 32px;
+      transition: background 0.2s;
+      position: relative;
+    }
+    .service-card:hover { background: #f9f9f9; }
+    .service-card-tag {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: #999;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .service-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+    .service-card p { font-size: 14px; color: #666; margin-bottom: 24px; line-height: 1.7; }
+    .service-card .price { font-size: 14px; font-weight: 700; margin-bottom: 20px; }
+    .service-card .arrow {
+      font-size: 20px;
+      position: absolute;
+      bottom: 32px;
+      right: 32px;
+      color: #ccc;
+      transition: color 0.2s;
+    }
+    .service-card:hover .arrow { color: #111; }
+    .service-card-main {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+    .service-card-main:hover { background: #222; }
+    .service-card-main .service-card-tag { color: #666; }
+    .service-card-main p { color: #aaa; }
+    .service-card-main .arrow { color: #555; }
+    .service-card-main:hover .arrow { color: #fff; }
+
+    /* ========== COMPARISON ========== */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .comparison-table th,
+    .comparison-table td {
+      padding: 16px 24px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+    .comparison-table th {
+      font-weight: 700;
+      font-size: 13px;
+      background: #f5f5f5;
+      letter-spacing: 0.05em;
+    }
+    .comparison-table td:first-child { font-weight: 600; }
+    .section-dark .comparison-table th { background: #1a1a1a; color: #999; border-color: #333; }
+    .section-dark .comparison-table td { border-color: #333; color: #ccc; }
+    .section-dark .comparison-table td:first-child { color: #fff; }
+
+    /* ========== FLOW ========== */
+    .flow-steps {
+      display: flex;
+      gap: 0;
+      counter-reset: step;
+    }
+    .flow-step {
+      flex: 1;
+      padding: 32px 24px;
+      border: 1px solid #eee;
+      position: relative;
+      counter-increment: step;
+    }
+    .flow-step::before {
+      content: counter(step, decimal-leading-zero);
+      font-size: 48px;
+      font-weight: 900;
+      color: #f0f0f0;
+      display: block;
+      margin-bottom: 16px;
+    }
+    .flow-step h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .flow-step p { font-size: 13px; color: #666; }
+
+    /* ========== PRICING ========== */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .pricing-card {
+      border: 1px solid #ddd;
+      padding: 48px 32px;
+      text-align: center;
+    }
+    .pricing-card-popular {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+      transform: scale(1.02);
+      position: relative;
+    }
+    .pricing-badge {
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      color: #111;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 16px;
+      letter-spacing: 0.1em;
+    }
+    .pricing-name {
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      color: #999;
+      margin-bottom: 8px;
+    }
+    .pricing-card-popular .pricing-name { color: #888; }
+    .pricing-price {
+      font-size: 40px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+    .pricing-price span { font-size: 16px; font-weight: 400; }
+    .pricing-unit { font-size: 13px; color: #999; margin-bottom: 32px; }
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 32px;
+    }
+    .pricing-features li {
+      font-size: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .pricing-card-popular .pricing-features li { border-color: #333; color: #ccc; }
+    .pricing-features li::before { content: '\2713\0020'; font-weight: 700; }
+
+    /* ========== FAQ ========== */
+    .faq-item {
+      border-bottom: 1px solid #eee;
+      padding: 24px 0;
+    }
+    .faq-q {
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq-q::before { content: 'Q.'; margin-right: 12px; color: #999; }
+    .faq-q::after { content: '+'; font-size: 24px; color: #ccc; }
+    .faq-a {
+      font-size: 14px;
+      color: #666;
+      padding: 16px 0 0 28px;
+      line-height: 1.8;
+    }
+
+    /* ========== CTA SECTION ========== */
+    .cta-section {
+      padding: 80px 0;
+      background: #111;
+      color: #fff;
+      text-align: center;
+    }
+    .cta-title { font-size: 32px; font-weight: 800; margin-bottom: 16px; }
+    .cta-desc { font-size: 16px; color: #999; margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+    /* ========== CONTACT FORM ========== */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .form-group { display: flex; flex-direction: column; }
+    .form-group-full { grid-column: 1 / -1; }
+    .form-label {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+    .form-label .required {
+      font-size: 10px;
+      background: #111;
+      color: #fff;
+      padding: 2px 6px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      padding: 14px 16px;
+      border: 1px solid #ddd;
+      font-size: 15px;
+      font-family: inherit;
+      background: #fff;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: #111;
+    }
+    .form-textarea { resize: vertical; min-height: 140px; }
+    .form-submit { grid-column: 1 / -1; text-align: center; margin-top: 16px; }
+
+    /* ========== ABOUT ========== */
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+    .team-card { display: flex; gap: 24px; }
+    .team-photo {
+      width: 120px;
+      height: 120px;
+      background: #eee;
+      flex-shrink: 0;
+    }
+    .team-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .team-role { font-size: 13px; color: #999; margin-bottom: 12px; }
+    .team-desc { font-size: 14px; color: #666; line-height: 1.7; }
+    .company-info {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0;
+      max-width: 600px;
+    }
+    .company-info dt,
+    .company-info dd {
+      padding: 14px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+    .company-info dt { font-weight: 600; color: #999; }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: #111;
+      color: #fff;
+      padding: 64px 0 32px;
+    }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-logo { font-size: 20px; font-weight: 900; letter-spacing: 0.15em; margin-bottom: 16px; }
+    .footer-desc { font-size: 13px; color: #888; line-height: 1.7; }
+    .footer-heading { font-size: 12px; font-weight: 700; letter-spacing: 0.15em; color: #666; margin-bottom: 16px; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a { font-size: 13px; color: #999; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #666;
+    }
+
+    /* ========== PAGE HEADER ========== */
+    .page-header {
+      padding: 140px 0 60px;
+      background: #f5f5f5;
+      border-bottom: 1px solid #eee;
+    }
+    .page-header h1 { font-size: 36px; font-weight: 800; }
+    .page-header p { font-size: 14px; color: #999; margin-top: 8px; }
+
+    /* ========== PAGE SEPARATOR ========== */
+    .page-sep {
+      padding: 40px 0;
+      text-align: center;
+      background: repeating-linear-gradient(
+        45deg,
+        #f8f8f8,
+        #f8f8f8 10px,
+        #fff 10px,
+        #fff 20px
+      );
+    }
+    .page-sep span {
+      display: inline-block;
+      background: #111;
+      color: #fff;
+      padding: 8px 32px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 32px; }
+      .hero { padding: 140px 0 80px; }
+      .hero-stats { gap: 24px; }
+      .problem-grid,
+      .service-grid,
+      .pricing-grid { grid-template-columns: 1fr; }
+      .flow-steps { flex-direction: column; }
+      .form-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .nav { display: none; }
+      .pricing-card-popular { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================= -->
+  <!--           HEADER              -->
+  <!-- ============================= -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">VAIZO</div>
+      <nav class="nav">
+        <a href="#services">SERVICE</a>
+        <a href="#about-section">ABOUT</a>
+        <a href="#case-section">CASE</a>
+        <a href="#news-section">NEWS</a>
+        <a href="#contact-section" class="btn btn-primary">CONTACT</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================= -->
+  <!--     PAGE: TOP / LP            -->
+  <!-- ============================= -->
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <span class="hero-label">AI BUSINESS TRANSFORMATION</span>
+      <h1 class="hero-title">
+        AIで、業務が<br>前に進む会社へ。
+        <span>エージェント型AI導入で、中小企業の実務を変える。</span>
+      </h1>
+      <p class="hero-desc">
+        VAIZOは「AIを入れる」のではなく「AIで業務が回る状態」を作ります。
+        環境構築からワークフロー実装、運用定着まで。
+      </p>
+      <div class="btn-group">
+        <a href="#contact-section" class="btn btn-white">無料AI診断を受ける</a>
+        <a href="#services" class="btn btn-white-outline">サービスを見る</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">30+</div>
+          <div class="hero-stat-label">業務自動化の実績</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">50%</div>
+          <div class="hero-stat-label">平均工数削減率</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">2week</div>
+          <div class="hero-stat-label">最短導入期間</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="section" id="problem">
+    <div class="container">
+      <p class="section-label text-center">PROBLEM</p>
+      <h2 class="section-title text-center">こんな課題、ありませんか？</h2>
+      <p class="section-desc text-center">AI時代の中小企業が直面する、3つの壁。</p>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-card-num">01</div>
+          <h3>AIを入れたが<br>使われていない</h3>
+          <p>ChatGPTを契約したが、社員が使い方を分からず放置。月額だけが消えていく。</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-num">02</div>
+          <h3>自由度が高すぎて<br>何をすればいいか不明</h3>
+          <p>「何でもできます」と言われても、業務のどこにどう使えばいいか分からない。</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-num">03</div>
+          <h3>導入しても<br>成果が見えない</h3>
+          <p>ツールは入ったが、工数削減や売上への効果が数値化されず、経営判断できない。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT (TOP内) -->
+  <section class="section section-dark" id="about">
+    <div class="container">
+      <p class="section-label text-center">ABOUT VAIZO</p>
+      <h2 class="section-title text-center">AIツール屋ではない。<br>業務を前に進めるパートナー。</h2>
+      <p class="section-desc text-center">
+        VAIZOは、エージェント型AIを軸に「業務が再現可能に回る仕組み」を企業に実装します。
+        導入して終わりではなく、成果が出るまで伴走する。それがVAIZOの事業です。
+      </p>
+
+      <table class="comparison-table" style="max-width:720px; margin: 0 auto;">
+        <thead>
+          <tr>
+            <th></th>
+            <th>従来のAI導入</th>
+            <th>VAIZOの導入</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>提供物</td>
+            <td>ツール / アカウント</td>
+            <td>業務ワークフロー全体</td>
+          </tr>
+          <tr>
+            <td>AIの動き</td>
+            <td>聞いたら答える</td>
+            <td>業務を分解し、前に進める</td>
+          </tr>
+          <tr>
+            <td>導入後</td>
+            <td>自力で運用</td>
+            <td>定着まで伴走 + 月次改善</td>
+          </tr>
+          <tr>
+            <td>成果</td>
+            <td>不明・感覚的</td>
+            <td>KPIで定量測定</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="container">
+      <p class="section-label text-center">SERVICE</p>
+      <h2 class="section-title text-center">3つのサービスで<br>AI導入を完結させる。</h2>
+      <p class="section-desc text-center">入口から定着まで。VAIZOが一貫して支援します。</p>
+      <div class="service-grid">
+        <div class="service-card">
+          <span class="service-card-tag">SERVICE 01 &mdash; ENTRY</span>
+          <h3>Web制作事業</h3>
+          <p>AIで自動構築した高品質なWebサイトを、10万円〜の買い切りで提供。AI導入への入口として機能します。</p>
+          <div class="price">10万円〜</div>
+          <a href="#web-lp" class="btn btn-outline" style="font-size:13px; padding:10px 20px;">詳しく見る</a>
+          <span class="arrow">&rarr;</span>
+        </div>
+        <div class="service-card service-card-main">
+          <span class="service-card-tag">SERVICE 02 &mdash; CORE</span>
+          <h3>AI導入支援</h3>
+          <p>エージェント型AIで「業務が自律的に進む状態」を構築。環境構築・権限設計・ワークフロー実装・運用定着まで。</p>
+          <div class="price">30万円〜100万円</div>
+          <a href="#ai-lp" class="btn btn-white" style="font-size:13px; padding:10px 20px;">詳しく見る</a>
+          <span class="arrow">&rarr;</span>
+        </div>
+        <div class="service-card">
+          <span class="service-card-tag">SERVICE 03 &mdash; GROWTH</span>
+          <h3>AI顧問<br>（月額サポート）</h3>
+          <p>毎月1つ以上の業務改善を実行。新しい活用法の提案、精度向上、社内展開を継続支援します。</p>
+          <div class="price">月額10万円〜</div>
+          <a href="#contact-section" class="btn btn-outline" style="font-size:13px; padding:10px 20px;">相談する</a>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section class="section section-gray" id="flow">
+    <div class="container">
+      <p class="section-label text-center">FLOW</p>
+      <h2 class="section-title text-center">導入の流れ</h2>
+      <p class="section-desc text-center">最短2週間。5つのステップで業務がAIで回り始めます。</p>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <h4>無料AI診断</h4>
+          <p>現状の業務課題をヒアリング。AIで改善可能な業務とROIを特定します。</p>
+        </div>
+        <div class="flow-step">
+          <h4>プラン提案</h4>
+          <p>対象業務・導入範囲・スケジュール・費用を明確に提示します。</p>
+        </div>
+        <div class="flow-step">
+          <h4>環境構築</h4>
+          <p>VAIZO AI基盤の構築、権限設計、セキュリティ設定、業務ルールの実装。</p>
+        </div>
+        <div class="flow-step">
+          <h4>業務実装</h4>
+          <p>1業務のワークフローを自動化。テスト運用し、精度を調整します。</p>
+        </div>
+        <div class="flow-step">
+          <h4>運用定着</h4>
+          <p>社内研修、効果測定、月次レビュー。成果が再現される状態を確認します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <p class="section-label text-center">PRICING</p>
+      <h2 class="section-title text-center">料金プラン</h2>
+      <p class="section-desc text-center">企業規模と導入範囲に応じた3つのプラン。</p>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-name">LIGHT</div>
+          <div class="pricing-price">30<span>万円</span></div>
+          <div class="pricing-unit">初期費用（税別）</div>
+          <ul class="pricing-features">
+            <li>業務ヒアリング</li>
+            <li>環境構築</li>
+            <li>1業務の自動化</li>
+            <li>基本ルール整備</li>
+            <li>使い方レクチャー</li>
+            <li>30日レビュー</li>
+          </ul>
+          <a href="#contact-section" class="btn btn-outline" style="width:100%;">相談する</a>
+        </div>
+        <div class="pricing-card pricing-card-popular">
+          <div class="pricing-badge">RECOMMENDED</div>
+          <div class="pricing-name">STANDARD</div>
+          <div class="pricing-price">50<span>万円</span></div>
+          <div class="pricing-unit">初期費用（税別）</div>
+          <ul class="pricing-features">
+            <li>LIGHTの全機能</li>
+            <li>権限・承認フロー設計</li>
+            <li>複数業務フロー対応</li>
+            <li>VAIZO AI管理画面</li>
+            <li>社内研修（2回）</li>
+            <li>60日運用サポート</li>
+          </ul>
+          <a href="#contact-section" class="btn btn-white" style="width:100%;">相談する</a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-name">ENTERPRISE</div>
+          <div class="pricing-price">100<span>万円〜</span></div>
+          <div class="pricing-unit">初期費用（税別）</div>
+          <ul class="pricing-features">
+            <li>STANDARDの全機能</li>
+            <li>部門横断ワークフロー</li>
+            <li>カスタムUI開発</li>
+            <li>セキュリティ監査対応</li>
+            <li>社内展開支援</li>
+            <li>90日運用サポート</li>
+          </ul>
+          <a href="#contact-section" class="btn btn-outline" style="width:100%;">相談する</a>
+        </div>
+      </div>
+      <p class="text-center" style="margin-top:32px; font-size:13px; color:#999;">
+        ※ AI導入補助金の活用が可能です。詳しくはお問い合わせください。<br>
+        ※ AI顧問（月額10万円〜）は別途ご契約いただけます。
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-gray" id="faq">
+    <div class="container" style="max-width:720px;">
+      <p class="section-label text-center">FAQ</p>
+      <h2 class="section-title text-center">よくある質問</h2>
+      <div style="margin-top:48px;">
+        <div class="faq-item">
+          <div class="faq-q">ChatGPTとの違いは何ですか？</div>
+          <div class="faq-a">ChatGPTは「聞いたら答える」AIです。VAIZOが導入するエージェント型AIは、業務を分解し、情報を取得し、下書きを作り、チェックし、承認を経て進める「仕事を前に進めるAI」です。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">ITに詳しくない社員でも使えますか？</div>
+          <div class="faq-a">はい。裏側はエンジニアリングですが、表側はシンプルなフォーム入力で完結する設計です。自由に指示する必要はなく、業務の型を選んで必要情報を入れるだけです。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">導入期間はどのくらいですか？</div>
+          <div class="faq-a">最短2週間〜1ヶ月が目安です。業務の複雑さや範囲により変動します。まずは1業務のPoC（検証）からスタートすることをおすすめしています。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">セキュリティは大丈夫ですか？</div>
+          <div class="faq-a">権限設計・承認フロー・ログ管理を導入時に設計します。「やってよいこと」「人間承認が必要なこと」「絶対にやらせないこと」を明確に分け、安全な運用環境を構築します。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">補助金は使えますか？</div>
+          <div class="faq-a">AI導入補助金の対象になるケースがあります。申請サポートも行っておりますので、お気軽にご相談ください。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA (TOP内) -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-title">まずは無料AI診断から。</div>
+      <p class="cta-desc">御社の業務で、AIが最も効果を発揮するポイントを特定します。30分のオンライン面談で完結。</p>
+      <div class="btn-group" style="justify-content:center;">
+        <a href="#contact-section" class="btn btn-white">無料AI診断に申し込む</a>
+        <a href="#services" class="btn btn-white-outline">サービス詳細を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!--   PAGE: SERVICE / AI導入支援   -->
+  <!-- ============================= -->
+  <div class="page-sep"><span>PAGE: /service/ai-implementation</span></div>
+
+  <section class="page-header" id="ai-lp">
+    <div class="container">
+      <p class="section-label">SERVICE 02</p>
+      <h1>AI導入支援</h1>
+      <p>エージェント型AIで業務が自律的に進む会社へ。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:720px;">
+      <p class="section-label">WHAT WE DO</p>
+      <h2 class="section-title">「AIを入れる」ではなく、<br>「業務を自律化する」。</h2>
+      <p style="color:#666; margin-bottom:32px; line-height:1.8;">
+        VAIZOが提供するのは、ChatGPTのような「質問→回答」のAIではありません。
+        業務の流れそのものを、AIエージェントが自律的に進められる状態を構築します。
+      </p>
+      <table class="comparison-table">
+        <thead><tr><th>項目</th><th>ChatGPT型</th><th>VAIZO エージェント型</th></tr></thead>
+        <tbody>
+          <tr><td>動作</td><td>聞かれたら答える</td><td>業務を分解し進める</td></tr>
+          <tr><td>状態管理</td><td>会話単位で消える</td><td>業務の途中経過を保持</td></tr>
+          <tr><td>外部連携</td><td>なし</td><td>ファイル・DB・ツールと接続</td></tr>
+          <tr><td>承認フロー</td><td>なし</td><td>人間承認ポイントを設計</td></tr>
+          <tr><td>再実行</td><td>最初からやり直し</td><td>途中から再開可能</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section section-gray">
+    <div class="container">
+      <p class="section-label text-center">USE CASES</p>
+      <h2 class="section-title text-center">対象業務の例</h2>
+      <div class="problem-grid" style="margin-top:48px;">
+        <div class="problem-card" style="background:#fff;">
+          <h3>日報・報告書の<br>半自動生成</h3>
+          <p>現場メモや音声から下書きを自動生成。必須項目チェック→承認依頼まで一連で進行。</p>
+        </div>
+        <div class="problem-card" style="background:#fff;">
+          <h3>議事録→<br>タスク化→振り分け</h3>
+          <p>会議音声から議事録を生成、タスクを抽出、担当者に振り分けて進捗管理まで。</p>
+        </div>
+        <div class="problem-card" style="background:#fff;">
+          <h3>提案書・見積書の<br>初稿自動作成</h3>
+          <p>過去案件を参照し、NG表現除外・会社ルール適用済みの初稿を即時生成。</p>
+        </div>
+        <div class="problem-card" style="background:#fff;">
+          <h3>問い合わせ対応の<br>一次自動化</h3>
+          <p>FAQとナレッジベースを参照し、定型回答を自動ドラフト。人間確認後に送信。</p>
+        </div>
+        <div class="problem-card" style="background:#fff;">
+          <h3>社内ナレッジの<br>検索・活用</h3>
+          <p>散在するドキュメントを横断検索。ベテランの暗黙知を全社で活用可能に。</p>
+        </div>
+        <div class="problem-card" style="background:#fff;">
+          <h3>コード修正・<br>LP更新の内製化</h3>
+          <p>外注していた軽微なWeb修正をAIエージェントで社内完結。コストと納期を大幅削減。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-title">御社の業務、どこからAI化する？</div>
+      <p class="cta-desc">無料AI診断で、最もROIの高い業務を特定します。</p>
+      <a href="#contact-section" class="btn btn-white">無料AI診断に申し込む</a>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!--    PAGE: SERVICE / Web制作     -->
+  <!-- ============================= -->
+  <div class="page-sep"><span>PAGE: /service/web</span></div>
+
+  <section class="page-header" id="web-lp">
+    <div class="container">
+      <p class="section-label">SERVICE 01</p>
+      <h1>Web制作事業</h1>
+      <p>AIが自動構築する、高品質なWebサイト。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:720px;">
+      <h2 class="section-title">古いサイトを、<br>最短3日でリニューアル。</h2>
+      <p style="color:#666; margin-bottom:48px; line-height:1.8;">
+        AI自動構築により、従来の1/10のコストと1/5の期間でプロフェッショナルなWebサイトを制作。
+        セキュリティ対策済み、スマホ対応、SEO最適化を標準装備。
+      </p>
+      <div class="problem-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="problem-card">
+          <h3>テンプレプラン</h3>
+          <div style="font-size:28px; font-weight:900; margin:16px 0;">10万円</div>
+          <p>テンプレートベース / 5ページ / テキスト支給 / 修正2回 / 最短3日納品</p>
+        </div>
+        <div class="problem-card">
+          <h3>カスタムプラン</h3>
+          <div style="font-size:28px; font-weight:900; margin:16px 0;">20万円〜</div>
+          <p>オリジナルデザイン / ページ数応相談 / 修正3回 / CMS搭載 / 保守プランあり</p>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:48px;">
+        <a href="#contact-section" class="btn btn-primary">Web制作の無料提案を受ける</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!--       PAGE: ABOUT             -->
+  <!-- ============================= -->
+  <div class="page-sep"><span>PAGE: /about</span></div>
+
+  <section class="page-header" id="about-section">
+    <div class="container">
+      <p class="section-label">ABOUT</p>
+      <h1>会社概要</h1>
+      <p>AIで、中小企業の実務を変える。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="section-label">MISSION</p>
+      <h2 class="section-title" style="max-width:600px;">
+        AIを使う側に回るための<br>入場券を、すべての企業へ。
+      </h2>
+      <p style="color:#666; max-width:600px; line-height:1.8; margin-bottom:64px;">
+        AI時代は「使える会社」と「使えない会社」に二極化します。
+        VAIZOは、中小企業がAIを業務に実装し、成果を出し続ける状態を作るパートナーです。
+      </p>
+
+      <p class="section-label" style="margin-top:64px;">TEAM</p>
+      <h3 style="font-size:20px; margin-bottom:32px;">共同代表</h3>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-photo"></div>
+          <div>
+            <div class="team-name">橋本 悠太郎</div>
+            <div class="team-role">Co-CEO / Business</div>
+            <div class="team-desc">経営戦略・営業・事業開発を担当。AIを使う前提の会社に変える"入場券ビジネス"を推進。</div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo"></div>
+          <div>
+            <div class="team-name">櫻井 理也</div>
+            <div class="team-role">Co-CEO / Technology</div>
+            <div class="team-desc">技術戦略・AI基盤構築・プロダクト開発を担当。Claude Code / MCP / エージェント設計の専門家。</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-label" style="margin-top:64px;">COMPANY</p>
+      <h3 style="font-size:20px; margin-bottom:32px;">会社情報</h3>
+      <dl class="company-info">
+        <dt>会社名</dt><dd>株式会社VAIZO</dd>
+        <dt>設立</dt><dd>2026年</dd>
+        <dt>資本金</dt><dd>500万円</dd>
+        <dt>代表者</dt><dd>橋本 悠太郎 / 櫻井 理也（共同代表）</dd>
+        <dt>事業内容</dt><dd>AI導入支援 / Web制作 / AI顧問 / AI教育支援</dd>
+        <dt>所在地</dt><dd>東京都（詳細はお問い合わせください）</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!--       PAGE: CASE STUDY        -->
+  <!-- ============================= -->
+  <div class="page-sep"><span>PAGE: /case</span></div>
+
+  <section class="page-header" id="case-section">
+    <div class="container">
+      <p class="section-label">CASE STUDY</p>
+      <h1>導入事例</h1>
+      <p>VAIZOが支援した企業の実績。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="problem-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="problem-card">
+          <div class="problem-card-num" style="color:#ddd;">CASE 01</div>
+          <h3>建設会社 A社</h3>
+          <p style="font-size:13px; color:#999; margin-bottom:8px;">従業員80名 / 導入期間: 3週間</p>
+          <p>日報作成の半自動化により、現場担当者1人あたり週3時間の工数を削減。提出前チェックの抜け漏れも90%減少。</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-num" style="color:#ddd;">CASE 02</div>
+          <h3>Web制作会社 B社</h3>
+          <p style="font-size:13px; color:#999; margin-bottom:8px;">従業員15名 / 導入期間: 2週間</p>
+          <p>提案書の初稿作成を自動化。1案件あたりの提案準備時間が4時間→45分に短縮。受注率も向上。</p>
+        </div>
+      </div>
+      <p class="text-center" style="margin-top:48px; color:#999; font-size:14px;">
+        ※ 導入事例は随時追加予定です。
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!--       PAGE: NEWS              -->
+  <!-- ============================= -->
+  <div class="page-sep"><span>PAGE: /news</span></div>
+
+  <section class="page-header" id="news-section">
+    <div class="container">
+      <p class="section-label">NEWS</p>
+      <h1>お知らせ</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:720px;">
+      <div style="border-bottom:1px solid #eee; padding:20px 0; display:flex; gap:24px; align-items:baseline;">
+        <span style="font-size:13px; color:#999; white-space:nowrap;">2026.04.01</span>
+        <span style="font-size:11px; background:#111; color:#fff; padding:2px 8px; white-space:nowrap;">PRESS</span>
+        <span style="font-size:15px; font-weight:600;">株式会社VAIZO、設立のお知らせ</span>
+      </div>
+      <div style="border-bottom:1px solid #eee; padding:20px 0; display:flex; gap:24px; align-items:baseline;">
+        <span style="font-size:13px; color:#999; white-space:nowrap;">2026.04.01</span>
+        <span style="font-size:11px; background:#eee; color:#111; padding:2px 8px; white-space:nowrap;">SERVICE</span>
+        <span style="font-size:15px; font-weight:600;">AI導入支援サービスの提供を開始</span>
+      </div>
+      <div style="border-bottom:1px solid #eee; padding:20px 0; display:flex; gap:24px; align-items:baseline;">
+        <span style="font-size:13px; color:#999; white-space:nowrap;">2026.04.01</span>
+        <span style="font-size:11px; background:#eee; color:#111; padding:2px 8px; white-space:nowrap;">SERVICE</span>
+        <span style="font-size:15px; font-weight:600;">Web自動制作サービスの提供を開始</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!--      PAGE: CONTACT            -->
+  <!-- ============================= -->
+  <div class="page-sep"><span>PAGE: /contact</span></div>
+
+  <section class="page-header" id="contact-section">
+    <div class="container">
+      <p class="section-label">CONTACT</p>
+      <h1>お問い合わせ</h1>
+      <p>まずはお気軽にご相談ください。無料AI診断も受付中です。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">お名前 <span class="required">必須</span></label>
+          <input type="text" class="form-input" placeholder="山田 太郎">
+        </div>
+        <div class="form-group">
+          <label class="form-label">会社名 <span class="required">必須</span></label>
+          <input type="text" class="form-input" placeholder="株式会社○○">
+        </div>
+        <div class="form-group">
+          <label class="form-label">メールアドレス <span class="required">必須</span></label>
+          <input type="email" class="form-input" placeholder="info@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">電話番号</label>
+          <input type="tel" class="form-input" placeholder="03-1234-5678">
+        </div>
+        <div class="form-group form-group-full">
+          <label class="form-label">お問い合わせ種別 <span class="required">必須</span></label>
+          <select class="form-select">
+            <option value="">選択してください</option>
+            <option>無料AI診断を受けたい</option>
+            <option>AI導入支援について相談したい</option>
+            <option>Web制作について相談したい</option>
+            <option>AI顧問について相談したい</option>
+            <option>AI教育・研修について</option>
+            <option>その他</option>
+          </select>
+        </div>
+        <div class="form-group form-group-full">
+          <label class="form-label">従業員数</label>
+          <select class="form-select">
+            <option value="">選択してください</option>
+            <option>1〜10名</option>
+            <option>11〜50名</option>
+            <option>51〜100名</option>
+            <option>101〜300名</option>
+            <option>301〜500名</option>
+            <option>500名以上</option>
+          </select>
+        </div>
+        <div class="form-group form-group-full">
+          <label class="form-label">お問い合わせ内容 <span class="required">必須</span></label>
+          <textarea class="form-textarea" placeholder="現在の課題、ご検討中の内容などをお書きください"></textarea>
+        </div>
+        <div class="form-submit">
+          <p style="font-size:13px; color:#999; margin-bottom:16px;">
+            <a href="/privacy" style="text-decoration:underline;">プライバシーポリシー</a>に同意の上、送信してください。
+          </p>
+          <button type="submit" class="btn btn-primary" style="min-width:280px;">送信する</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!--          FOOTER               -->
+  <!-- ============================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">VAIZO</div>
+          <p class="footer-desc">AIで、業務が前に進む会社へ。<br>エージェント型AI導入で、中小企業の実務を変える。</p>
+        </div>
+        <div>
+          <div class="footer-heading">SERVICE</div>
+          <ul class="footer-links">
+            <li><a href="#web-lp">Web制作事業</a></li>
+            <li><a href="#ai-lp">AI導入支援</a></li>
+            <li><a href="#services">AI顧問</a></li>
+            <li><a href="#services">AI教育支援</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">COMPANY</div>
+          <ul class="footer-links">
+            <li><a href="#about-section">会社概要</a></li>
+            <li><a href="#case-section">導入事例</a></li>
+            <li><a href="#news-section">お知らせ</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">SUPPORT</div>
+          <ul class="footer-links">
+            <li><a href="#contact-section">お問い合わせ</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+            <li><a href="#">特定商取引法表記</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 VAIZO Inc. All rights reserved.</span>
+        <span>AI BUSINESS TRANSFORMATION</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
