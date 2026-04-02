@@ -14,11 +14,17 @@
   canvas.height = h * dpr;
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-  // Shooting star parameters
+  // Shooting star parameters — start top-left, aim at exact center
+  var startX = w * 0.1;
+  var startY = h * 0.05;
+  var centerX = w * 0.5;
+  var centerY = h * 0.5;
   var star = {
-    x: w * 0.15,
-    y: h * 0.08,
-    angle: Math.atan2(h * 0.55, w * 0.65),
+    x: startX,
+    y: startY,
+    targetX: centerX,
+    targetY: centerY,
+    angle: Math.atan2(centerY - startY, centerX - startX),
     speed: 0,
     accel: 0.35,
     maxSpeed: 18,
@@ -66,8 +72,12 @@
       star.y += Math.sin(star.angle) * star.speed;
       star.tailLength = Math.min(star.tailLength + 6, star.maxTail);
 
-      // End when past center-ish
-      if (star.x > w * 0.6 && star.y > h * 0.45) {
+      // End when reaching exact center
+      var dx = star.x - star.targetX;
+      var dy = star.y - star.targetY;
+      if (Math.sqrt(dx * dx + dy * dy) < star.speed) {
+        star.x = star.targetX;
+        star.y = star.targetY;
         star.phase = 2;
         star.timer = 0;
         // Create burst
