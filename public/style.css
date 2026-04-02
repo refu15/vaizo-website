@@ -217,7 +217,7 @@ img { max-width: 100%; }
   position: relative;
 }
 .service-card:hover { background: #f9f9f9; }
-.service-card-tag { font-size: 11px; letter-spacing: 0.15em; color: #999; margin-bottom: 20px; display: block; }
+.service-card-tag { font-size: 11px; letter-spacing: 0.15em; color: #111; margin-bottom: 20px; display: block; }
 .service-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 16px; line-height: 1.4; }
 .service-card p { font-size: 14px; color: #666; margin-bottom: 24px; line-height: 1.7; }
 .service-card .price { font-size: 14px; font-weight: 700; margin-bottom: 20px; }
