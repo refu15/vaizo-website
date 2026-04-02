@@ -64,15 +64,16 @@
   });
 
   // ===== SCORING & RESULT =====
+  // hoursPerWeek: その業務にかかる平均週間時間, elimination: AIが完全になくせる割合(0-1)
   var TASK_DB = {
-    '日報・報告書の作成': { effect: '現場メモ→下書き自動生成で1人あたり週2〜3時間削減', priority: 9 },
-    '議事録・会議の整理': { effect: '会議音声→議事録→タスク化→担当者振り分けまで自動化', priority: 9 },
-    '提案書・見積書の作成': { effect: '過去案件参照＋会社ルール適用で初稿作成を4時間→45分に', priority: 10 },
-    '問い合わせ対応': { effect: 'FAQ+ナレッジ参照で一次回答を自動ドラフト、人間確認後に送信', priority: 8 },
-    '社内ナレッジの検索・共有': { effect: '散在ドキュメントの横断検索、ベテランの暗黙知を全社活用', priority: 7 },
-    'Web・LP制作の外注コスト': { effect: 'AI自動構築で制作コスト1/10、社内で軽微な修正が完結', priority: 7 },
-    'データ入力・集計': { effect: '定型入力の自動化、集計レポートの自動生成で工数70%削減', priority: 8 },
-    '採用・人事業務': { effect: '求人票作成・応募者スクリーニング・面談記録の整理を自動化', priority: 6 }
+    '日報・報告書の作成': { effect: '日報作成業務を完全にAIが代行。人間は最終確認のみ。', priority: 9, hoursPerWeek: 3, elimination: 0.9 },
+    '議事録・会議の整理': { effect: '会議→議事録→タスク化→振り分けまで、人間の作業をゼロに。', priority: 9, hoursPerWeek: 4, elimination: 0.85 },
+    '提案書・見積書の作成': { effect: '提案書作成業務を丸ごとAIが担当。4時間の業務が消える。', priority: 10, hoursPerWeek: 5, elimination: 0.9 },
+    '問い合わせ対応': { effect: '一次対応をAIが完全代行。人間は例外対応のみに集中。', priority: 8, hoursPerWeek: 6, elimination: 0.8 },
+    '社内ナレッジの検索・共有': { effect: '情報を探す時間をゼロに。AIが即座に正確な情報を提示。', priority: 7, hoursPerWeek: 3, elimination: 0.85 },
+    'Web・LP制作の外注コスト': { effect: '制作・修正業務を完全内製化。外注待ちの時間が消える。', priority: 7, hoursPerWeek: 4, elimination: 0.8 },
+    'データ入力・集計': { effect: 'データ入力・集計業務を完全自動化。人間の手作業をゼロに。', priority: 8, hoursPerWeek: 5, elimination: 0.95 },
+    '採用・人事業務': { effect: '求人票作成・スクリーニング・記録整理をAIが完全代行。', priority: 6, hoursPerWeek: 4, elimination: 0.7 }
   };
 
   var PLANS = [
@@ -174,22 +175,47 @@
     }
     document.getElementById('summary-text').textContent = summaryParts.join('');
 
-    // Recommended tasks
+    // Recommended tasks with time calculation
     var tasksHtml = '';
     var painAreas = answers.pain_areas || [];
+    var totalWeeklyHours = 0;
     var sortedTasks = painAreas.slice().sort(function(a, b) {
       return (TASK_DB[b] ? TASK_DB[b].priority : 5) - (TASK_DB[a] ? TASK_DB[a].priority : 5);
     });
     sortedTasks.forEach(function(task) {
       var info = TASK_DB[task];
       if (info) {
-        tasksHtml += '<div class="diag-result-item"><span><strong>' + task + '</strong><br><span style="color:#666;">' + info.effect + '</span></span></div>';
+        var saved = Math.round(info.hoursPerWeek * info.elimination * 10) / 10;
+        totalWeeklyHours += saved;
+        tasksHtml += '<div class="diag-result-item"><span>'
+          + '<strong>' + task + '</strong>'
+          + '<span style="display:inline-block; background:#111; color:#fff; font-size:12px; font-weight:700; padding:2px 8px; margin-left:8px;">週 ' + saved + 'h 削減</span>'
+          + '<br><span style="color:#666;">' + info.effect + '</span>'
+          + '</span></div>';
       }
     });
     if (!tasksHtml) {
       tasksHtml = '<div class="diag-result-item"><span>業務を選択されなかったため、個別のヒアリングで最適な業務を特定します。</span></div>';
     }
     document.getElementById('result-tasks').innerHTML = tasksHtml;
+
+    // Time savings summary
+    if (totalWeeklyHours > 0) {
+      var yearlyHours = Math.round(totalWeeklyHours * 50);
+      var hourlyCost = 3000;
+      var yearlyValue = yearlyHours * hourlyCost;
+      var valueStr = yearlyValue >= 10000 ? Math.round(yearlyValue / 10000) + '万' : yearlyValue.toLocaleString();
+      var timeBox = document.getElementById('result-time');
+      if (timeBox) {
+        timeBox.style.display = 'block';
+        timeBox.innerHTML = '<div style="display:flex; justify-content:center; gap:48px; flex-wrap:wrap;">'
+          + '<div style="text-align:center;"><div style="font-size:40px; font-weight:900;">' + totalWeeklyHours.toFixed(1) + '<span style="font-size:16px; font-weight:400;">h</span></div><div style="font-size:12px; color:#666;">週間削減時間</div></div>'
+          + '<div style="text-align:center;"><div style="font-size:40px; font-weight:900;">' + yearlyHours + '<span style="font-size:16px; font-weight:400;">h</span></div><div style="font-size:12px; color:#666;">年間削減時間</div></div>'
+          + '<div style="text-align:center;"><div style="font-size:40px; font-weight:900;">約' + valueStr + '<span style="font-size:16px; font-weight:400;">円</span></div><div style="font-size:12px; color:#666;">年間効果額（時給3,000円換算）</div></div>'
+          + '</div>'
+          + '<p style="text-align:center; font-size:13px; color:#999; margin-top:16px;">この時間を売上を生む業務に再配分できます。</p>';
+      }
+    }
 
     // Plan
     document.getElementById('plan-name').textContent = plan.name;
