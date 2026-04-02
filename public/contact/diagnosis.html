@@ -4,108 +4,261 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>無料AI診断 | VAIZO</title>
-  <meta name="description" content="30分のオンライン面談で、御社の業務でAIが最も効果を発揮するポイントを特定します。">
+  <meta name="description" content="5つの質問に答えるだけで、御社のAI導入適性と最適な導入プランがわかります。">
   <link rel="stylesheet" href="/style.css">
+  <style>
+    .diag-wrap { max-width: 680px; margin: 0 auto; }
+
+    /* Progress */
+    .diag-progress { display: flex; gap: 6px; margin-bottom: 48px; }
+    .diag-progress-dot { flex: 1; height: 4px; background: #ddd; border-radius: 2px; transition: background 0.3s; }
+    .diag-progress-dot.active { background: #111; }
+    .diag-progress-dot.done { background: #111; }
+
+    /* Step */
+    .diag-step { display: none; }
+    .diag-step.active { display: block; animation: diagFadeIn 0.4s ease; }
+    @keyframes diagFadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .diag-step-num { font-size: 13px; letter-spacing: 0.15em; color: #999; margin-bottom: 8px; }
+    .diag-step-title { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+    .diag-step-desc { font-size: 14px; color: #666; margin-bottom: 32px; }
+
+    /* Choice buttons */
+    .diag-choices { display: flex; flex-direction: column; gap: 12px; }
+    .diag-choice {
+      padding: 18px 24px;
+      border: 2px solid #ddd;
+      background: #fff;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      text-align: left;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .diag-choice:hover { border-color: #111; background: #f9f9f9; }
+    .diag-choice.selected { border-color: #111; background: #111; color: #fff; }
+    .diag-choice-icon { font-size: 20px; flex-shrink: 0; width: 32px; text-align: center; }
+
+    /* Multi-select */
+    .diag-multi .diag-choice.selected { background: #111; color: #fff; }
+    .diag-multi-hint { font-size: 12px; color: #999; margin-bottom: 16px; }
+    .diag-multi-next { margin-top: 24px; }
+
+    /* Textarea step */
+    .diag-textarea {
+      width: 100%;
+      padding: 16px;
+      border: 2px solid #ddd;
+      font-size: 15px;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 120px;
+      transition: border-color 0.2s;
+    }
+    .diag-textarea:focus { outline: none; border-color: #111; }
+    .diag-textarea-hint { font-size: 12px; color: #999; margin-top: 8px; }
+    .diag-skip { font-size: 13px; color: #999; cursor: pointer; margin-top: 16px; display: inline-block; }
+    .diag-skip:hover { color: #111; }
+
+    /* Result */
+    .diag-result { display: none; animation: diagFadeIn 0.6s ease; }
+    .diag-result.active { display: block; }
+    .diag-score-ring { width: 160px; height: 160px; margin: 0 auto 32px; position: relative; }
+    .diag-score-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .diag-score-ring circle { fill: none; stroke-width: 8; }
+    .diag-score-ring .bg { stroke: #eee; }
+    .diag-score-ring .fg { stroke: #111; stroke-linecap: round; transition: stroke-dashoffset 1.5s ease; }
+    .diag-score-num { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 40px; font-weight: 900; }
+    .diag-score-label { text-align: center; font-size: 14px; color: #666; margin-bottom: 48px; }
+
+    .diag-result-section { margin-bottom: 40px; }
+    .diag-result-section h3 { font-size: 18px; font-weight: 700; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #111; }
+    .diag-result-item { padding: 12px 0; border-bottom: 1px solid #eee; font-size: 14px; display: flex; gap: 12px; }
+    .diag-result-item::before { content: '\25A0'; color: #111; flex-shrink: 0; margin-top: 1px; }
+    .diag-result-plan { padding: 32px; border: 2px solid #111; text-align: center; margin-bottom: 40px; }
+    .diag-result-plan-name { font-size: 12px; letter-spacing: 0.15em; color: #999; margin-bottom: 4px; }
+    .diag-result-plan-title { font-size: 24px; font-weight: 900; margin-bottom: 8px; }
+    .diag-result-plan-desc { font-size: 14px; color: #666; }
+    .diag-result-plan-price { font-size: 32px; font-weight: 900; margin-top: 16px; }
+    .diag-result-plan-price span { font-size: 14px; font-weight: 400; }
+
+    .diag-summary-box { background: #f5f5f5; padding: 24px; margin-bottom: 40px; }
+    .diag-summary-box h4 { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+    .diag-summary-box p { font-size: 14px; color: #444; line-height: 1.8; }
+
+    .diag-cta { text-align: center; padding: 48px 0; border-top: 1px solid #eee; }
+    .diag-cta-title { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+    .diag-cta-desc { font-size: 14px; color: #666; margin-bottom: 24px; }
+
+    @media (max-width: 768px) {
+      .diag-step-title { font-size: 20px; }
+      .diag-score-ring { width: 120px; height: 120px; }
+      .diag-score-num { font-size: 32px; }
+    }
+  </style>
 </head>
 <body>
   <header class="header"><div class="header-inner"><div class="logo"><a href="/">VAIZO</a></div><button class="menu-toggle" aria-label="Menu">&#9776;</button><nav class="nav"><a href="/service/">サービス</a><a href="/about.html">会社概要</a><a href="/case/">導入事例</a><a href="/news/">お知らせ</a><a href="/contact/" class="btn btn-primary btn-sm">お問い合わせ</a></nav></div></header>
 
   <section class="page-header-dark">
     <div class="container">
-      <p class="section-label" style="color:#666;">FREE DIAGNOSIS</p>
+      <p class="section-label" style="color:rgba(255,255,255,0.7);">FREE DIAGNOSIS</p>
       <h1>無料AI診断</h1>
-      <p>30分で、御社のAI活用ポイントを特定します。</p>
+      <p>5つの質問に答えるだけで、御社のAI導入適性がわかります。</p>
     </div>
   </section>
 
   <section class="section">
-    <div class="container narrow">
-      <h2 class="section-title text-center">無料AI診断でわかること</h2>
-      <div class="card-grid card-grid-3" style="margin-top:48px;">
-        <div class="card" style="text-align:center;">
-          <div style="font-size:36px; font-weight:900; color:#eee; margin-bottom:12px;">01</div>
-          <h3>AI適用可能な<br>業務の特定</h3>
-          <p>御社の業務の中で、AIエージェントが最も効果を発揮する業務を特定します。</p>
-        </div>
-        <div class="card" style="text-align:center;">
-          <div style="font-size:36px; font-weight:900; color:#eee; margin-bottom:12px;">02</div>
-          <h3>削減可能な<br>工数の試算</h3>
-          <p>導入によりどれだけの時間・コストが削減できるか、ROIを概算します。</p>
-        </div>
-        <div class="card" style="text-align:center;">
-          <div style="font-size:36px; font-weight:900; color:#eee; margin-bottom:12px;">03</div>
-          <h3>最適な<br>導入プラン</h3>
-          <p>御社の規模・課題に合わせた最適な導入ステップとプランをご提案します。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-gray">
     <div class="container">
-      <h2 class="section-title text-center">無料AI診断に申し込む</h2>
-      <p class="section-desc text-center">以下のフォームにご記入ください。担当者より1営業日以内にご連絡いたします。</p>
-      <form class="form-grid" action="/contact/thanks.html" method="GET">
-        <div class="form-group">
-          <label class="form-label">お名前 <span class="req">必須</span></label>
-          <input type="text" class="form-input" placeholder="山田 太郎" required>
+      <div class="diag-wrap" id="diagnosis">
+
+        <!-- Progress bar -->
+        <div class="diag-progress" id="diag-progress">
+          <div class="diag-progress-dot active"></div>
+          <div class="diag-progress-dot"></div>
+          <div class="diag-progress-dot"></div>
+          <div class="diag-progress-dot"></div>
+          <div class="diag-progress-dot"></div>
         </div>
-        <div class="form-group">
-          <label class="form-label">会社名 <span class="req">必須</span></label>
-          <input type="text" class="form-input" placeholder="株式会社○○" required>
+
+        <!-- STEP 1: 業種 -->
+        <div class="diag-step active" data-step="1">
+          <div class="diag-step-num">QUESTION 01 / 05</div>
+          <div class="diag-step-title">御社の業種は？</div>
+          <div class="diag-step-desc">最も近いものを選んでください。</div>
+          <div class="diag-choices" data-key="industry">
+            <button class="diag-choice" data-value="建設・不動産" data-score="8"><span class="diag-choice-icon">🏗</span>建設・不動産</button>
+            <button class="diag-choice" data-value="製造" data-score="8"><span class="diag-choice-icon">🏭</span>製造</button>
+            <button class="diag-choice" data-value="IT・Web" data-score="10"><span class="diag-choice-icon">💻</span>IT・Web</button>
+            <button class="diag-choice" data-value="小売・卸売" data-score="7"><span class="diag-choice-icon">🏪</span>小売・卸売</button>
+            <button class="diag-choice" data-value="サービス" data-score="8"><span class="diag-choice-icon">🤝</span>サービス</button>
+            <button class="diag-choice" data-value="医療・福祉" data-score="5"><span class="diag-choice-icon">🏥</span>医療・福祉</button>
+            <button class="diag-choice" data-value="士業・コンサル" data-score="9"><span class="diag-choice-icon">📋</span>士業・コンサル</button>
+            <button class="diag-choice" data-value="その他" data-score="7"><span class="diag-choice-icon">📁</span>その他</button>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">メールアドレス <span class="req">必須</span></label>
-          <input type="email" class="form-input" placeholder="info@example.com" required>
+
+        <!-- STEP 2: 従業員数 -->
+        <div class="diag-step" data-step="2">
+          <div class="diag-step-num">QUESTION 02 / 05</div>
+          <div class="diag-step-title">従業員数は？</div>
+          <div class="diag-step-desc">パート・アルバイト含む概算で構いません。</div>
+          <div class="diag-choices" data-key="size">
+            <button class="diag-choice" data-value="1〜10名" data-score="6"><span class="diag-choice-icon">👤</span>1〜10名</button>
+            <button class="diag-choice" data-value="11〜50名" data-score="8"><span class="diag-choice-icon">👥</span>11〜50名</button>
+            <button class="diag-choice" data-value="51〜100名" data-score="9"><span class="diag-choice-icon">🏢</span>51〜100名</button>
+            <button class="diag-choice" data-value="101〜300名" data-score="10"><span class="diag-choice-icon">🏢</span>101〜300名</button>
+            <button class="diag-choice" data-value="301〜500名" data-score="9"><span class="diag-choice-icon">🏛</span>301〜500名</button>
+            <button class="diag-choice" data-value="500名以上" data-score="7"><span class="diag-choice-icon">🏛</span>500名以上</button>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">電話番号 <span class="req">必須</span></label>
-          <input type="tel" class="form-input" placeholder="03-1234-5678" required>
+
+        <!-- STEP 3: AI活用状況 -->
+        <div class="diag-step" data-step="3">
+          <div class="diag-step-num">QUESTION 03 / 05</div>
+          <div class="diag-step-title">現在のAI活用状況は？</div>
+          <div class="diag-step-desc">最も近い状態を選んでください。</div>
+          <div class="diag-choices" data-key="ai_status">
+            <button class="diag-choice" data-value="まだ何も使っていない" data-score="10"><span class="diag-choice-icon">⬜</span>まだ何も使っていない</button>
+            <button class="diag-choice" data-value="個人的に使っている社員がいる" data-score="8"><span class="diag-choice-icon">🔲</span>個人的に使っている社員がいる</button>
+            <button class="diag-choice" data-value="ChatGPT等を会社で契約している" data-score="7"><span class="diag-choice-icon">◼</span>ChatGPT等を会社で契約している</button>
+            <button class="diag-choice" data-value="AIツールを業務に組み込み済み" data-score="5"><span class="diag-choice-icon">⬛</span>AIツールを業務に組み込み済み</button>
+          </div>
         </div>
-        <div class="form-group form-group-full">
-          <label class="form-label">業種 <span class="req">必須</span></label>
-          <select class="form-select" required>
-            <option value="">選択してください</option>
-            <option>建設・不動産</option>
-            <option>製造</option>
-            <option>IT・Web</option>
-            <option>小売・卸売</option>
-            <option>サービス</option>
-            <option>医療・福祉</option>
-            <option>士業・コンサル</option>
-            <option>その他</option>
-          </select>
+
+        <!-- STEP 4: 課題業務（複数選択） -->
+        <div class="diag-step" data-step="4">
+          <div class="diag-step-num">QUESTION 04 / 05</div>
+          <div class="diag-step-title">課題を感じている業務は？</div>
+          <div class="diag-multi-hint">複数選択可。選んだら「次へ」を押してください。</div>
+          <div class="diag-choices diag-multi" data-key="pain_areas">
+            <button class="diag-choice" data-value="日報・報告書の作成"><span class="diag-choice-icon">📝</span>日報・報告書の作成</button>
+            <button class="diag-choice" data-value="議事録・会議の整理"><span class="diag-choice-icon">🎙</span>議事録・会議の整理</button>
+            <button class="diag-choice" data-value="提案書・見積書の作成"><span class="diag-choice-icon">📄</span>提案書・見積書の作成</button>
+            <button class="diag-choice" data-value="問い合わせ対応"><span class="diag-choice-icon">💬</span>問い合わせ対応</button>
+            <button class="diag-choice" data-value="社内ナレッジの検索・共有"><span class="diag-choice-icon">🔍</span>社内ナレッジの検索・共有</button>
+            <button class="diag-choice" data-value="Web・LP制作の外注コスト"><span class="diag-choice-icon">🌐</span>Web・LP制作の外注コスト</button>
+            <button class="diag-choice" data-value="データ入力・集計"><span class="diag-choice-icon">📊</span>データ入力・集計</button>
+            <button class="diag-choice" data-value="採用・人事業務"><span class="diag-choice-icon">👔</span>採用・人事業務</button>
+          </div>
+          <div class="diag-multi-next">
+            <button class="btn btn-primary" id="step4-next" disabled>次へ</button>
+          </div>
         </div>
-        <div class="form-group form-group-full">
-          <label class="form-label">従業員数 <span class="req">必須</span></label>
-          <select class="form-select" required>
-            <option value="">選択してください</option>
-            <option>1〜10名</option>
-            <option>11〜50名</option>
-            <option>51〜100名</option>
-            <option>101〜300名</option>
-            <option>301〜500名</option>
-            <option>500名以上</option>
-          </select>
+
+        <!-- STEP 5: 自由記述 -->
+        <div class="diag-step" data-step="5">
+          <div class="diag-step-num">QUESTION 05 / 05</div>
+          <div class="diag-step-title">具体的な課題があれば教えてください</div>
+          <div class="diag-step-desc">自由に記入してください。空欄でもOKです。</div>
+          <textarea class="diag-textarea" id="freetext" placeholder="例: 提案書作成に毎回4時間かかっている / ベテラン社員に業務が偏っている / AIを導入したが使われていない"></textarea>
+          <div class="diag-textarea-hint">入力内容は診断結果のまとめに反映されます。</div>
+          <div style="margin-top:24px;">
+            <button class="btn btn-primary" id="step5-submit">診断結果を見る</button>
+          </div>
         </div>
-        <div class="form-group form-group-full">
-          <label class="form-label">現在の課題や気になっていること <span class="req">必須</span></label>
-          <textarea class="form-textarea" placeholder="例: 日報作成に時間がかかる / 提案書のクオリティにばらつきがある / AIを導入したいが何から始めればいいか分からない" required></textarea>
+
+        <!-- RESULT -->
+        <div class="diag-result" id="diag-result">
+          <div style="text-align:center; margin-bottom:48px;">
+            <div class="diag-step-num">DIAGNOSIS RESULT</div>
+            <div class="diag-step-title" style="font-size:28px;">御社のAI導入適性</div>
+          </div>
+
+          <div class="diag-score-ring">
+            <svg viewBox="0 0 120 120">
+              <circle class="bg" cx="60" cy="60" r="52"></circle>
+              <circle class="fg" id="score-circle" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"></circle>
+            </svg>
+            <div class="diag-score-num" id="score-num">0</div>
+          </div>
+          <div class="diag-score-label" id="score-label"></div>
+
+          <!-- Summary box -->
+          <div class="diag-summary-box" id="result-summary">
+            <h4>診断まとめ</h4>
+            <p id="summary-text"></p>
+          </div>
+
+          <!-- Recommended tasks -->
+          <div class="diag-result-section">
+            <h3>AI化の効果が高い業務</h3>
+            <div id="result-tasks"></div>
+          </div>
+
+          <!-- Recommended plan -->
+          <div class="diag-result-plan" id="result-plan">
+            <div class="diag-result-plan-name" id="plan-name"></div>
+            <div class="diag-result-plan-title" id="plan-title"></div>
+            <div class="diag-result-plan-desc" id="plan-desc"></div>
+            <div class="diag-result-plan-price" id="plan-price"></div>
+          </div>
+
+          <!-- Key insights -->
+          <div class="diag-result-section">
+            <h3>診断からの示唆</h3>
+            <div id="result-insights"></div>
+          </div>
+
+          <!-- CTA -->
+          <div class="diag-cta">
+            <div class="diag-cta-title">詳しい診断レポートをお送りします</div>
+            <div class="diag-cta-desc">この診断結果をもとに、御社に最適な導入ステップを具体化します。</div>
+            <a href="/contact/" class="btn btn-primary">無料相談を予約する</a>
+          </div>
         </div>
-        <div class="form-group form-group-full">
-          <label class="form-label">ご希望の面談日時</label>
-          <input type="text" class="form-input" placeholder="例: 来週の平日午後であればいつでも可能">
-        </div>
-        <div class="form-submit">
-          <p class="form-note"><a href="/privacy.html">プライバシーポリシー</a>に同意の上、送信してください。</p>
-          <button type="submit" class="btn btn-primary" style="min-width:280px;">無料AI診断に申し込む</button>
-        </div>
-      </form>
+
+      </div>
     </div>
   </section>
 
   <footer class="footer"><div class="container"><div class="footer-inner"><div><div class="footer-logo">VAIZO</div><p class="footer-desc">AIで、業務が前に進む会社へ。</p></div><div><div class="footer-heading">サービス</div><ul class="footer-links"><li><a href="/service/web.html">Web制作事業</a></li><li><a href="/service/ai-implementation.html">AI導入支援</a></li><li><a href="/service/ai-advisor.html">AI顧問</a></li><li><a href="/service/ai-education.html">AI教育支援</a></li></ul></div><div><div class="footer-heading">会社情報</div><ul class="footer-links"><li><a href="/about.html">会社概要</a></li><li><a href="/case/">導入事例</a></li><li><a href="/news/">お知らせ</a></li></ul></div><div><div class="footer-heading">サポート</div><ul class="footer-links"><li><a href="/contact/">お問い合わせ</a></li><li><a href="/privacy.html">プライバシーポリシー</a></li><li><a href="/legal.html">特定商取引法表記</a></li></ul></div></div><div class="footer-bottom"><span>&copy; 2026 VAIZO Inc.</span><span>AI で業務が前に進む会社へ</span></div></div></footer>
   <script src="/main.js"></script>
   <script src="/stars-animation.js"></script>
+  <script src="/diagnosis.js"></script>
 </body>
 </html>
