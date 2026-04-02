@@ -189,8 +189,8 @@ img { max-width: 100%; }
   pointer-events: none;
 }
 .page-header h1, .page-header-dark h1 { font-size: 36px; font-weight: 800; }
-.page-header p, .page-header-dark p { font-size: 14px; color: rgba(255,255,255,0.6); margin-top: 8px; }
-.page-header .section-label, .page-header-dark .section-label { color: rgba(255,255,255,0.4); }
+.page-header p, .page-header-dark p { font-size: 14px; color: #fff; margin-top: 8px; }
+.page-header .section-label, .page-header-dark .section-label { color: rgba(255,255,255,0.7); }
 
 /* ========== CARDS ========== */
 .card-grid { display: grid; gap: 24px; }
