@@ -252,7 +252,7 @@ img { max-width: 100%; }
   content: counter(step, decimal-leading-zero);
   font-size: 48px;
   font-weight: 900;
-  color: #f0f0f0;
+  color: #111;
   display: block;
   margin-bottom: 16px;
 }
