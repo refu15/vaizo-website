@@ -36,12 +36,9 @@
       text-align: left;
       transition: all 0.15s;
       display: flex;
-      align-items: center;
-      gap: 16px;
     }
     .diag-choice:hover { border-color: #111; background: #f9f9f9; }
     .diag-choice.selected { border-color: #111; background: #111; color: #fff; }
-    .diag-choice-icon { font-size: 20px; flex-shrink: 0; width: 32px; text-align: center; }
 
     /* Multi-select */
     .diag-multi .diag-choice.selected { background: #111; color: #fff; }
@@ -131,14 +128,14 @@
           <div class="diag-step-title">御社の業種は？</div>
           <div class="diag-step-desc">最も近いものを選んでください。</div>
           <div class="diag-choices" data-key="industry">
-            <button class="diag-choice" data-value="建設・不動産" data-score="8"><span class="diag-choice-icon">>🏗</span>#9632;</span>建設・不動産</button>
-            <button class="diag-choice" data-value="製造" data-score="8"><span class="diag-choice-icon">>🏭</span>#9632;</span>製造</button>
-            <button class="diag-choice" data-value="IT・Web" data-score="10"><span class="diag-choice-icon">>💻</span>#9632;</span>IT・Web</button>
-            <button class="diag-choice" data-value="小売・卸売" data-score="7"><span class="diag-choice-icon">>🏪</span>#9632;</span>小売・卸売</button>
-            <button class="diag-choice" data-value="サービス" data-score="8"><span class="diag-choice-icon">>🤝</span>#9632;</span>サービス</button>
-            <button class="diag-choice" data-value="医療・福祉" data-score="5"><span class="diag-choice-icon">>🏥</span>#9632;</span>医療・福祉</button>
-            <button class="diag-choice" data-value="士業・コンサル" data-score="9"><span class="diag-choice-icon">>📋</span>#9632;</span>士業・コンサル</button>
-            <button class="diag-choice" data-value="その他" data-score="7"><span class="diag-choice-icon">>📁</span>#9632;</span>その他</button>
+            <button class="diag-choice" data-value="建設・不動産" data-score="8">建設・不動産</button>
+            <button class="diag-choice" data-value="製造" data-score="8">製造</button>
+            <button class="diag-choice" data-value="IT・Web" data-score="10">IT・Web</button>
+            <button class="diag-choice" data-value="小売・卸売" data-score="7">小売・卸売</button>
+            <button class="diag-choice" data-value="サービス" data-score="8">サービス</button>
+            <button class="diag-choice" data-value="医療・福祉" data-score="5">医療・福祉</button>
+            <button class="diag-choice" data-value="士業・コンサル" data-score="9">士業・コンサル</button>
+            <button class="diag-choice" data-value="その他" data-score="7">その他</button>
           </div>
         </div>
 
@@ -148,12 +145,12 @@
           <div class="diag-step-title">従業員数は？</div>
           <div class="diag-step-desc">パート・アルバイト含む概算で構いません。</div>
           <div class="diag-choices" data-key="size">
-            <button class="diag-choice" data-value="1〜10名" data-score="6"><span class="diag-choice-icon">>👤</span>#9642;</span>1〜10名</button>
-            <button class="diag-choice" data-value="11〜50名" data-score="8"><span class="diag-choice-icon">>👥</span>#9642;>👥</span>#9642;</span>11〜50名</button>
-            <button class="diag-choice" data-value="51〜100名" data-score="9"><span class="diag-choice-icon">>🏢</span>#9646;</span>51〜100名</button>
-            <button class="diag-choice" data-value="101〜300名" data-score="10"><span class="diag-choice-icon">>🏢</span>#9646;</span>101〜300名</button>
-            <button class="diag-choice" data-value="301〜500名" data-score="9"><span class="diag-choice-icon">>🏛</span>#9646;>🏛</span>#9646;</span>301〜500名</button>
-            <button class="diag-choice" data-value="500名以上" data-score="7"><span class="diag-choice-icon">>🏛</span>#9646;>🏛</span>#9646;</span>500名以上</button>
+            <button class="diag-choice" data-value="1〜10名" data-score="6">1〜10名</button>
+            <button class="diag-choice" data-value="11〜50名" data-score="8">11〜50名</button>
+            <button class="diag-choice" data-value="51〜100名" data-score="9">51〜100名</button>
+            <button class="diag-choice" data-value="101〜300名" data-score="10">101〜300名</button>
+            <button class="diag-choice" data-value="301〜500名" data-score="9">301〜500名</button>
+            <button class="diag-choice" data-value="500名以上" data-score="7">500名以上</button>
           </div>
         </div>
 
@@ -163,10 +160,10 @@
           <div class="diag-step-title">現在のAI活用状況は？</div>
           <div class="diag-step-desc">最も近い状態を選んでください。</div>
           <div class="diag-choices" data-key="ai_status">
-            <button class="diag-choice" data-value="まだ何も使っていない" data-score="10"><span class="diag-choice-icon">>⬜</span>#9633;</span>まだ何も使っていない</button>
-            <button class="diag-choice" data-value="個人的に使っている社員がいる" data-score="8"><span class="diag-choice-icon">>🔲</span>#9635;</span>個人的に使っている社員がいる</button>
-            <button class="diag-choice" data-value="ChatGPT等を会社で契約している" data-score="7"><span class="diag-choice-icon">>◼</span>#9635;>◼</span>#9635;</span>ChatGPT等を会社で契約している</button>
-            <button class="diag-choice" data-value="AIツールを業務に組み込み済み" data-score="5"><span class="diag-choice-icon">>⬛</span>#9632;>⬛</span>#9632;</span>AIツールを業務に組み込み済み</button>
+            <button class="diag-choice" data-value="まだ何も使っていない" data-score="10">まだ何も使っていない</button>
+            <button class="diag-choice" data-value="個人的に使っている社員がいる" data-score="8">個人的に使っている社員がいる</button>
+            <button class="diag-choice" data-value="ChatGPT等を会社で契約している" data-score="7">ChatGPT等を会社で契約している</button>
+            <button class="diag-choice" data-value="AIツールを業務に組み込み済み" data-score="5">AIツールを業務に組み込み済み</button>
           </div>
         </div>
 
@@ -176,14 +173,14 @@
           <div class="diag-step-title">課題を感じている業務は？</div>
           <div class="diag-multi-hint">複数選択可。選んだら「次へ」を押してください。</div>
           <div class="diag-choices diag-multi" data-key="pain_areas">
-            <button class="diag-choice" data-value="日報・報告書の作成"><span class="diag-choice-icon">>📝</span>#9654;</span>日報・報告書の作成</button>
-            <button class="diag-choice" data-value="議事録・会議の整理"><span class="diag-choice-icon">>🎙</span>#9654;</span>議事録・会議の整理</button>
-            <button class="diag-choice" data-value="提案書・見積書の作成"><span class="diag-choice-icon">>📄</span>#9654;</span>提案書・見積書の作成</button>
-            <button class="diag-choice" data-value="問い合わせ対応"><span class="diag-choice-icon">>💬</span>#9654;</span>問い合わせ対応</button>
-            <button class="diag-choice" data-value="社内ナレッジの検索・共有"><span class="diag-choice-icon">>🔍</span>#9654;</span>社内ナレッジの検索・共有</button>
-            <button class="diag-choice" data-value="Web・LP制作の外注コスト"><span class="diag-choice-icon">>🌐</span>#9654;</span>Web・LP制作の外注コスト</button>
-            <button class="diag-choice" data-value="データ入力・集計"><span class="diag-choice-icon">>📊</span>#9654;</span>データ入力・集計</button>
-            <button class="diag-choice" data-value="採用・人事業務"><span class="diag-choice-icon">>👔</span>#9654;</span>採用・人事業務</button>
+            <button class="diag-choice" data-value="日報・報告書の作成">日報・報告書の作成</button>
+            <button class="diag-choice" data-value="議事録・会議の整理">議事録・会議の整理</button>
+            <button class="diag-choice" data-value="提案書・見積書の作成">提案書・見積書の作成</button>
+            <button class="diag-choice" data-value="問い合わせ対応">問い合わせ対応</button>
+            <button class="diag-choice" data-value="社内ナレッジの検索・共有">社内ナレッジの検索・共有</button>
+            <button class="diag-choice" data-value="Web・LP制作の外注コスト">Web・LP制作の外注コスト</button>
+            <button class="diag-choice" data-value="データ入力・集計">データ入力・集計</button>
+            <button class="diag-choice" data-value="採用・人事業務">採用・人事業務</button>
           </div>
           <div class="diag-multi-next">
             <button class="btn btn-primary" id="step4-next" disabled>次へ</button>
