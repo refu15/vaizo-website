@@ -106,7 +106,7 @@ img { max-width: 100%; }
 .nav { display: flex; gap: 32px; align-items: center; }
 .nav a { font-size: 13px; font-weight: 600; letter-spacing: 0.05em; color: #555; transition: color 0.2s; }
 .nav a:hover { color: #111; }
-.nav .btn { padding: 10px 24px; font-size: 13px; }
+.nav .btn { padding: 10px 24px; font-size: 13px; color: #fff !important; }
 .menu-toggle { display: none; background: none; border: none; font-size: 24px; cursor: pointer; }
 
 /* ========== HERO ========== */
