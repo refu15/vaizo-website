@@ -23,50 +23,63 @@
       <div style="text-align:center; margin-bottom:48px;">
         <a href="/contact/diagnosis.html" class="btn btn-primary">無料AI診断はこちら（専用フォーム）</a>
       </div>
-      <form class="form-grid" action="/contact/thanks.html" method="GET">
+      <form class="form-grid" action="https://formsubmit.co/info@vaizo.jp" method="POST">
+        <!-- Anti-spam: honeypot -->
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+        <!-- Disable CAPTCHA page (uses honeypot instead) -->
+        <input type="hidden" name="_captcha" value="false">
+        <!-- Redirect after submit -->
+        <input type="hidden" name="_next" value="https://vaizo.jp/contact/thanks.html">
+        <!-- Subject line -->
+        <input type="hidden" name="_subject" value="【VAIZO】お問い合わせがありました">
+        <!-- Auto-response -->
+        <input type="hidden" name="_autoresponse" value="お問い合わせありがとうございます。内容を確認の上、2営業日以内にご連絡いたします。&#10;&#10;株式会社VAIZO">
+        <!-- Template -->
+        <input type="hidden" name="_template" value="table">
+
         <div class="form-group">
           <label class="form-label">お名前 <span class="req">必須</span></label>
-          <input type="text" class="form-input" placeholder="山田 太郎" required>
+          <input type="text" name="name" class="form-input" placeholder="山田 太郎" required maxlength="100">
         </div>
         <div class="form-group">
           <label class="form-label">会社名 <span class="req">必須</span></label>
-          <input type="text" class="form-input" placeholder="株式会社○○" required>
+          <input type="text" name="company" class="form-input" placeholder="株式会社○○" required maxlength="200">
         </div>
         <div class="form-group">
           <label class="form-label">メールアドレス <span class="req">必須</span></label>
-          <input type="email" class="form-input" placeholder="info@example.com" required>
+          <input type="email" name="email" class="form-input" placeholder="info@example.com" required maxlength="254">
         </div>
         <div class="form-group">
           <label class="form-label">電話番号</label>
-          <input type="tel" class="form-input" placeholder="03-1234-5678">
+          <input type="tel" name="phone" class="form-input" placeholder="03-1234-5678" maxlength="20" pattern="[0-9\-\+\(\)\s]*">
         </div>
         <div class="form-group form-group-full">
           <label class="form-label">お問い合わせ種別 <span class="req">必須</span></label>
-          <select class="form-select" required>
+          <select name="category" class="form-select" required>
             <option value="">選択してください</option>
-            <option>AI導入支援について相談したい</option>
-            <option>Web制作について相談したい</option>
-            <option>AI顧問について相談したい</option>
-            <option>AI教育・研修について</option>
-            <option>パートナーシップについて</option>
-            <option>その他</option>
+            <option value="AI導入支援について相談したい">AI導入支援について相談したい</option>
+            <option value="Web制作について相談したい">Web制作について相談したい</option>
+            <option value="AI顧問について相談したい">AI顧問について相談したい</option>
+            <option value="AI教育・研修について">AI教育・研修について</option>
+            <option value="パートナーシップについて">パートナーシップについて</option>
+            <option value="その他">その他</option>
           </select>
         </div>
         <div class="form-group form-group-full">
           <label class="form-label">従業員数</label>
-          <select class="form-select">
+          <select name="employees" class="form-select">
             <option value="">選択してください</option>
-            <option>1〜10名</option>
-            <option>11〜50名</option>
-            <option>51〜100名</option>
-            <option>101〜300名</option>
-            <option>301〜500名</option>
-            <option>500名以上</option>
+            <option value="1〜10名">1〜10名</option>
+            <option value="11〜50名">11〜50名</option>
+            <option value="51〜100名">51〜100名</option>
+            <option value="101〜300名">101〜300名</option>
+            <option value="301〜500名">301〜500名</option>
+            <option value="500名以上">500名以上</option>
           </select>
         </div>
         <div class="form-group form-group-full">
           <label class="form-label">お問い合わせ内容 <span class="req">必須</span></label>
-          <textarea class="form-textarea" placeholder="現在の課題、ご検討中の内容などをお書きください" required></textarea>
+          <textarea name="message" class="form-textarea" placeholder="現在の課題、ご検討中の内容などをお書きください" required maxlength="5000"></textarea>
         </div>
         <div class="form-submit">
           <p class="form-note"><a href="/privacy.html">プライバシーポリシー</a>に同意の上、送信してください。</p>

@@ -118,6 +118,12 @@
     return PLANS[0];
   }
 
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
   function buildSummary() {
     var parts = [];
     if (answers.industry) parts.push('業種: ' + answers.industry.value);
@@ -127,7 +133,7 @@
       parts.push('課題業務: ' + answers.pain_areas.join('、'));
     }
     if (answers.freetext) {
-      parts.push('具体的な課題: 「' + answers.freetext + '」');
+      parts.push('具体的な課題: 「' + escapeHtml(answers.freetext) + '」');
     }
     return parts.join('\n');
   }
@@ -171,7 +177,7 @@
       summaryParts.push(AI_STATUS_INSIGHTS[answers.ai_status.value] || '');
     }
     if (answers.freetext) {
-      summaryParts.push('「' + answers.freetext + '」という課題に対しても、AIエージェントによる改善が期待できます。');
+      summaryParts.push('ご記入いただいた課題に対しても、AIエージェントによる改善が期待できます。');
     }
     document.getElementById('summary-text').textContent = summaryParts.join('');
 
