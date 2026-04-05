@@ -387,9 +387,11 @@ img { max-width: 100%; }
 
 /* ========== RECRUIT ========== */
 .card-grid-5 { grid-template-columns: repeat(5, 1fr); }
-.recruit-mission-detail { margin-top: 32px; }
-.recruit-mission-detail p { font-size: 16px; color: #444; line-height: 2; margin-bottom: 24px; }
-.recruit-mission-detail strong { color: #111; }
+.recruit-mission-split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.recruit-mission-left .section-title { margin-bottom: 16px; }
+.recruit-mission-left .section-desc { max-width: none; }
+.recruit-mission-right p { font-size: 15px; color: #444; line-height: 2; margin-bottom: 24px; }
+.recruit-mission-right strong { color: #111; }
 
 .recruit-culture-grid { display: flex; flex-direction: column; gap: 0; margin-top: 32px; }
 .recruit-culture-item { display: flex; gap: 24px; padding: 24px 0; border-bottom: 1px solid #ddd; }
@@ -408,6 +410,7 @@ img { max-width: 100%; }
 
 @media (max-width: 768px) {
   .card-grid-5 { grid-template-columns: 1fr; }
+  .recruit-mission-split { grid-template-columns: 1fr; gap: 32px; }
   .recruit-culture-item { flex-direction: column; gap: 8px; }
   .recruit-culture-label { min-width: auto; }
   .recruit-position-header, .recruit-position-body { padding-left: 20px; padding-right: 20px; }
