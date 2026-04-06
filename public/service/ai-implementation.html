@@ -3,101 +3,268 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI導入支援 | VAIZO</title>
-  <meta name="description" content="エージェント型AIで業務が自律的に進む会社へ。ChatGPTとは違う、業務を前に進めるAI導入支援。">
+  <title>AI導入支援 — SANBO AI｜AI経営参謀サービス | VAIZO</title>
+  <meta name="description" content="経営者がAIに悩む時代は、終わりにしましょう。技術のことは参謀に。あなたは経営に集中してください。情報提供から導入・活用・成果創出まで伴走します。">
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <header class="header"><div class="header-inner"><div class="logo"><a href="/">VAIZO</a></div><button class="menu-toggle" aria-label="Menu">&#9776;</button><nav class="nav"><a href="/service/">サービス</a><a href="/about.html">会社概要</a><a href="/case/">導入事例</a><a href="/news/">お知らせ</a>
         <a href="/recruit/">採用情報</a><a href="/contact/" class="btn btn-primary btn-sm">お問い合わせ</a></nav></div></header>
 
-  <section class="page-header-dark">
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <canvas id="hero-canvas"></canvas>
     <div class="container">
-      <p class="section-label" style="color:#666;">SERVICE 02 — CORE</p>
-      <h1>AI導入支援</h1>
-      <p>エージェント型AIで業務が自律的に進む会社へ。</p>
-    </div>
-  </section>
-
-  <!-- WHAT -->
-  <section class="section">
-    <div class="container narrow">
-      <p class="section-label">WHAT WE DO</p>
-      <h2 class="section-title">業務を一つ、<br>完全になくす。</h2>
-      <p style="color:#666; margin-bottom:40px; line-height:1.8;">
-        VAIZOが提供するのは「AIで少し楽になる」ではありません。<br>
-        対象業務をAIエージェントが丸ごと担い、人間はその業務から完全に解放されます。<br>
-        削減した時間は、売上を生む業務や新しい挑戦に使えます。
+      <span class="hero-label">SERVICE 02 — AI導入支援</span>
+      <h1 class="hero-title">
+        SANBO AI
+        <span>AI経営参謀サービス。情報提供から、導入、全社展開まで。</span>
+      </h1>
+      <p class="hero-desc">
+        技術のことは参謀に。あなたは経営に集中してください。<br>
+        AI専門家が御社の"参謀"として伴走します。
       </p>
-      <table class="comp-table">
-        <thead><tr><th>項目</th><th>ChatGPT型</th><th>VAIZO エージェント型</th></tr></thead>
-        <tbody>
-          <tr><td>ゴール</td><td>業務を「少し楽にする」</td><td>業務を一つ「完全になくす」</td></tr>
-          <tr><td>動作</td><td>聞かれたら答える</td><td>業務を分解し、完了まで進める</td></tr>
-          <tr><td>状態管理</td><td>会話単位で消える</td><td>業務の途中経過を保持</td></tr>
-          <tr><td>外部連携</td><td>なし</td><td>ファイル・DB・ツールと接続</td></tr>
-          <tr><td>成果測定</td><td>感覚的</td><td>削減時間 × 時給 = 年間効果額</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- PLATFORM -->
-  <section class="section section-dark">
-    <div class="container narrow">
-      <p class="section-label">PLATFORM</p>
-      <h2 class="section-title">VAIZO AIプラットフォーム</h2>
-      <p class="section-desc" style="margin-left:0;">
-        シンプルな入力画面の裏側で、高度なAIエージェントが業務を遂行。社員はフォームに入力するだけ。
-      </p>
-      <ul class="feature-list">
-        <li>業務の型を選んで必要情報を入力するだけの簡単操作</li>
-        <li>会社ルール・禁止事項・承認フローを事前に設定</li>
-        <li>過去資料やナレッジを自動参照して精度の高い出力</li>
-        <li>実行ログ・履歴を完全記録、管理者ダッシュボード付き</li>
-        <li>権限レベル別の制御（自動実行 / 条件付き / 人間承認必須）</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- USE CASES -->
-  <section class="section">
-    <div class="container">
-      <p class="section-label text-center">USE CASES</p>
-      <h2 class="section-title text-center">対象業務の例</h2>
-      <p class="section-desc text-center">ChatGPTでは弱いが、エージェント型AIなら強い業務。</p>
-      <div class="card-grid card-grid-3">
-        <div class="card"><h3>日報・報告書の<br>半自動生成</h3><p>現場メモや音声から下書きを自動生成。必須項目チェック→承認依頼まで一連で進行。</p></div>
-        <div class="card"><h3>議事録→<br>タスク化→振り分け</h3><p>会議音声から議事録を生成、タスクを抽出、担当者に振り分けて進捗管理まで。</p></div>
-        <div class="card"><h3>提案書・見積書の<br>初稿自動作成</h3><p>過去案件を参照し、NG表現除外・会社ルール適用済みの初稿を即時生成。</p></div>
-        <div class="card"><h3>問い合わせ対応の<br>一次自動化</h3><p>FAQとナレッジベースを参照し、定型回答を自動ドラフト。人間確認後に送信。</p></div>
-        <div class="card"><h3>社内ナレッジの<br>検索・活用</h3><p>散在するドキュメントを横断検索。ベテランの暗黙知を全社で活用可能に。</p></div>
-        <div class="card"><h3>コード修正・<br>LP更新の内製化</h3><p>外注していた軽微なWeb修正をAIエージェントで社内完結。コストと納期を大幅削減。</p></div>
+      <div class="btn-group">
+        <a href="/contact/" class="btn btn-white">無料で相談する</a>
+        <a href="#pricing" class="btn btn-white-outline">料金プランを見る</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">0円</div>
+          <div class="hero-stat-label">初期費用</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">初月無料</div>
+          <div class="hero-stat-label">から開始</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">業界不問</div>
+          <div class="hero-stat-label">導入実績</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- SECURITY -->
-  <section class="section section-gray">
+  <!-- PROBLEM -->
+  <section class="section" id="problem">
+    <div class="container">
+      <p class="section-label text-center">PROBLEM</p>
+      <h2 class="section-title text-center">こんなお悩み、ありませんか？</h2>
+      <p class="section-desc text-center">経営者がAIで躓くのは、技術の問題ではありません。</p>
+      <div class="card-grid card-grid-2" style="max-width:800px; margin:0 auto;">
+        <div class="card">
+          <h3>AIが話題だけど、<br>うちにどう関係ある？</h3>
+          <p>乗り遅れたくないが、自社業務にどう活かせるのか具体的にわからない。</p>
+        </div>
+        <div class="card">
+          <h3>導入を決めたが、<br>社内に詳しい人がいない</h3>
+          <p>何から始めればいいかわからず、IT部門に丸投げして経営課題と紐づかない。</p>
+        </div>
+        <div class="card">
+          <h3>AI人材を雇いたいが<br>コストが合わない</h3>
+          <p>年収700万〜のエンジニア採用は中小企業には現実的ではない。</p>
+        </div>
+        <div class="card">
+          <h3>ChatGPTを入れたが<br>誰も使いこなせない</h3>
+          <p>ツールは入ったが使い方を教える人がおらず、月額だけ払っている。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAUSE → SOLUTION -->
+  <section class="section section-dark">
     <div class="container narrow">
-      <p class="section-label">SECURITY</p>
-      <h2 class="section-title">権限設計・セキュリティ</h2>
-      <p style="color:#666; margin-bottom:40px; line-height:1.8;">
-        AIの暴走を防ぐ3段階の制御レイヤーで、安全な運用を実現します。
-      </p>
+      <p class="section-label text-center">WHY IT FAILS</p>
+      <h2 class="section-title text-center">なぜ、AI導入は失敗するのか？</h2>
+      <p class="section-desc text-center">「技術」だけを導入しようとするからです。</p>
+
+      <div class="lp-fail-box">
+        <div class="lp-fail-label">よくある失敗パターン</div>
+        <ul class="lp-fail-list">
+          <li>ツールだけ入れて、具体的な使い方を教える人がいない</li>
+          <li>IT部門に丸投げして、経営課題と紐づいていない</li>
+          <li>「とりあえずChatGPT」で、自社に最適なAIを選べていない</li>
+          <li>導入後のフォローがなく、1ヶ月で使われなくなる</li>
+        </ul>
+      </div>
+
+      <div style="text-align:center; margin:24px 0; font-size:32px; color:#666;">&#9660;</div>
+
+      <div class="lp-solution-box">
+        <div class="lp-solution-label">SANBO AI のアプローチ</div>
+        <h3 style="text-align:center; font-size:22px; font-weight:700; margin-bottom:32px;">技術ではなく「経営の成果」に直結させる</h3>
+        <div class="card-grid card-grid-2" style="gap:16px;">
+          <div class="card card-dark" style="border-color:#333;">
+            <p style="color:#ccc;">経営者・部長に直接、AI活用の判断材料を提供する</p>
+          </div>
+          <div class="card card-dark" style="border-color:#333;">
+            <p style="color:#ccc;">御社の業務フローを分析し、最適なAIツールを選定・セットアップ</p>
+          </div>
+          <div class="card card-dark" style="border-color:#333;">
+            <p style="color:#ccc;">毎月の定例と改善提案で「導入して終わり」にしない</p>
+          </div>
+          <div class="card card-dark" style="border-color:#333;">
+            <p style="color:#ccc;">技術の話はすべて参謀が引き受け、経営に集中できる環境をつくる</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERSONA -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label text-center">FOR YOU</p>
+      <h2 class="section-title text-center">こんな経営者・部長のための<br>サービスです</h2>
+      <p class="section-desc text-center">それぞれのフェーズに合わせたプランをご用意しています。</p>
       <div class="card-grid card-grid-3">
-        <div class="card" style="background:#fff;">
-          <h3>レベル1<br>自動実行</h3>
-          <p>下書き生成、要約、分類、議事録化など、リスクの低い操作。</p>
+        <div class="card">
+          <div class="card-num" style="font-size:12px; color:#999; letter-spacing:0.1em;">ENTRY PLAN 向き</div>
+          <h3>まず情報がほしい</h3>
+          <p style="font-size:13px; color:#999; margin-bottom:12px;">従業員5〜30名 ／ 社長</p>
+          <p style="font-style:italic; border-left:3px solid #111; padding-left:12px;">「AIって騒がれてるけど、うちの会社にどう関係あるの？乗り遅れたくはないんだけど…」</p>
         </div>
-        <div class="card" style="background:#fff;">
-          <h3>レベル2<br>条件付き自動</h3>
-          <p>本番反映、CMS更新、顧客向け文面作成など、条件を満たせば自動実行。</p>
+        <div class="card">
+          <div class="card-num" style="font-size:12px; color:#999; letter-spacing:0.1em;">STANDARD PLAN 向き</div>
+          <h3>導入を決めた。任せたい</h3>
+          <p style="font-size:13px; color:#999; margin-bottom:12px;">従業員10〜50名 ／ 社長・部長</p>
+          <p style="font-style:italic; border-left:3px solid #111; padding-left:12px;">「AI導入を決めたが、やり方がわからない。セットアップから成果が出るまで伴走してほしい」</p>
         </div>
-        <div class="card" style="background:#fff;">
-          <h3>レベル3<br>人間承認必須</h3>
-          <p>メール送信、契約関連、課金操作、外部公開など。必ず人間が確認。</p>
+        <div class="card">
+          <div class="card-num" style="font-size:12px; color:#999; letter-spacing:0.1em;">PREMIUM PLAN 向き</div>
+          <h3>全部お任せしたい</h3>
+          <p style="font-size:13px; color:#999; margin-bottom:12px;">従業員30〜100名 ／ 経営者</p>
+          <p style="font-style:italic; border-left:3px solid #111; padding-left:12px;">「AI部門を持ちたいが、エンジニアを雇う余裕はない。環境構築から運用まで丸ごと任せたい」</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section section-gray" id="features">
+    <div class="container">
+      <p class="section-label text-center">WHY SANBO AI</p>
+      <h2 class="section-title text-center">SANBO AI が選ばれる3つの理由</h2>
+      <div class="lp-reasons">
+        <div class="lp-reason">
+          <div class="lp-reason-num">01</div>
+          <div class="lp-reason-content">
+            <h3>技術者ではなく、経営者目線で話せる</h3>
+            <p>専門用語を並べるシステム屋ではなく、売上向上やコスト削減といった「経営者の言葉」でAIの価値と具体的なインパクトをお伝えします。</p>
+          </div>
+        </div>
+        <div class="lp-reason">
+          <div class="lp-reason-num">02</div>
+          <div class="lp-reason-content">
+            <h3>情報提供だけでなく、手を動かす</h3>
+            <p>「アドバイスだけ」のコンサル会社とは違います。AIツールの導入・セットアップ、外部ツール連携設定、業務AI化の実装まで、私たちが手を動かします。</p>
+          </div>
+        </div>
+        <div class="lp-reason">
+          <div class="lp-reason-num">03</div>
+          <div class="lp-reason-content">
+            <h3>フェーズに合わせて、段階的に深められる</h3>
+            <p>「まず月5万円で情報収集」から始めて、成果を確認しながら導入・全社展開へ。初月無料または半額で、リスクなく始められます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <p class="section-label text-center">PRICING</p>
+      <h2 class="section-title text-center">料金プラン</h2>
+      <p class="section-desc text-center">全プラン初期費用0円。まずはお試しから始められます。</p>
+      <div class="pricing-grid" style="margin-top:48px;">
+        <div class="pricing-card" style="background:#fff;">
+          <div class="pricing-name">ENTRY</div>
+          <div style="font-size:12px; color:#999; margin-bottom:8px;">AI経営顧問</div>
+          <div class="pricing-price">5<span>万円/月</span></div>
+          <div class="pricing-unit">初期費用 0円（税別）</div>
+          <div style="background:#f5f5f5; padding:8px; text-align:center; font-size:13px; font-weight:700; margin-bottom:24px;">初月無料でお試し</div>
+          <ul class="pricing-features">
+            <li>AI最新情報レポート（月1回）</li>
+            <li>AI活用アイデア提案（月2〜3件）</li>
+            <li>月1回オンラインMTG（1h）</li>
+            <li>チャット相談（月5件まで）</li>
+          </ul>
+          <div style="font-size:12px; color:#aaa; text-align:center; margin-bottom:16px;">最低契約期間：なし</div>
+          <a href="/contact/" class="btn btn-outline btn-full">相談する</a>
+        </div>
+        <div class="pricing-card pricing-card-popular">
+          <div class="pricing-badge">RECOMMENDED</div>
+          <div class="pricing-name">STANDARD</div>
+          <div style="font-size:12px; color:#888; margin-bottom:8px;">AI導入・活用伴走</div>
+          <div class="pricing-price">25<span>万円/月</span></div>
+          <div class="pricing-unit">初期費用 0円（税別）／利用者3名まで</div>
+          <div style="background:#222; padding:8px; text-align:center; font-size:13px; font-weight:700; margin-bottom:24px; color:#fff;">初月半額 12.5万円でお試し</div>
+          <ul class="pricing-features">
+            <li>エントリーの全内容</li>
+            <li>AIツール導入・セットアップ</li>
+            <li>外部ツール連携設定</li>
+            <li>月2回オンラインMTG</li>
+            <li>月次AI活用経営レポート</li>
+            <li>毎月1件 業務AI化の実装</li>
+            <li>チャットサポート（月10件）</li>
+          </ul>
+          <div style="font-size:12px; color:#888; text-align:center; margin-bottom:16px;">最低契約期間：3ヶ月</div>
+          <a href="/contact/" class="btn btn-white btn-full">相談する</a>
+        </div>
+        <div class="pricing-card" style="background:#fff;">
+          <div class="pricing-name">PREMIUM</div>
+          <div style="font-size:12px; color:#999; margin-bottom:8px;">AI部門アウトソーシング</div>
+          <div class="pricing-price">50<span>万円〜/月</span></div>
+          <div class="pricing-unit">初期費用 0円（税別）／基本5名まで</div>
+          <div style="background:#f5f5f5; padding:8px; text-align:center; font-size:13px; font-weight:700; margin-bottom:24px;">初月半額でお試し</div>
+          <ul class="pricing-features">
+            <li>スタンダードの全内容</li>
+            <li>御社専用AI業務環境の構築</li>
+            <li>業務フロー フルカスタマイズ</li>
+            <li>毎月2件以上 業務AI化の実装</li>
+            <li>チャットサポート（原則無制限）</li>
+            <li>障害対応・アップデート対応</li>
+            <li>セキュリティ・データ分離</li>
+          </ul>
+          <div style="font-size:12px; color:#aaa; text-align:center; margin-bottom:16px;">最低契約期間：6ヶ月</div>
+          <a href="/contact/" class="btn btn-outline btn-full">相談する</a>
+        </div>
+      </div>
+      <p class="text-center" style="margin-top:24px; font-size:13px; color:#999;">
+        ※ 表示価格は目安です。御社の規模・ご要望に応じてお見積もりいたします。<br>
+        ※ 表示価格はすべて税別です。
+      </p>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE -->
+  <section class="section section-gray">
+    <div class="container">
+      <p class="section-label text-center">COMPARISON</p>
+      <h2 class="section-title text-center">プラン比較表</h2>
+      <div style="overflow-x:auto; margin-top:48px;">
+        <table class="comp-table">
+          <thead>
+            <tr><th></th><th>ENTRY<br><span style="font-weight:400; font-size:11px;">月額5万円</span></th><th>STANDARD<br><span style="font-weight:400; font-size:11px;">月額25万円</span></th><th>PREMIUM<br><span style="font-weight:400; font-size:11px;">月額50万円〜</span></th></tr>
+          </thead>
+          <tbody>
+            <tr><td>初期費用</td><td>0円</td><td>0円</td><td>0円</td></tr>
+            <tr><td>お試し</td><td>初月無料</td><td>初月半額</td><td>初月半額</td></tr>
+            <tr><td>最低契約期間</td><td>なし</td><td>3ヶ月</td><td>6ヶ月</td></tr>
+            <tr><td>AI最新情報レポート</td><td style="text-align:center;">&#9679;</td><td style="text-align:center;">&#9679;</td><td style="text-align:center;">&#9679;</td></tr>
+            <tr><td>オンラインMTG</td><td>月1回</td><td>月2回</td><td>月2回</td></tr>
+            <tr><td>チャットサポート</td><td>月5件</td><td>月10件</td><td>原則無制限</td></tr>
+            <tr><td>AIツール導入・研修</td><td style="text-align:center; color:#ccc;">―</td><td style="text-align:center;">&#9679;</td><td style="text-align:center;">&#9679;</td></tr>
+            <tr><td>外部ツール連携設定</td><td style="text-align:center; color:#ccc;">―</td><td style="text-align:center;">&#9679;</td><td style="text-align:center;">&#9679;</td></tr>
+            <tr><td>月次経営レポート</td><td style="text-align:center; color:#ccc;">―</td><td style="text-align:center;">&#9679;</td><td style="text-align:center;">&#9679;（効果測定付）</td></tr>
+            <tr><td>業務AI化 実装</td><td style="text-align:center; color:#ccc;">―</td><td>月1件</td><td>月2件以上</td></tr>
+            <tr><td>専用AI環境 構築</td><td style="text-align:center; color:#ccc;">―</td><td style="text-align:center; color:#ccc;">―</td><td style="text-align:center;">&#9679;</td></tr>
+            <tr><td>フルカスタマイズ</td><td style="text-align:center; color:#ccc;">―</td><td style="text-align:center; color:#ccc;">―</td><td style="text-align:center;">&#9679;</td></tr>
+            <tr><td>障害・アップデート対応</td><td style="text-align:center; color:#ccc;">―</td><td style="text-align:center; color:#ccc;">―</td><td style="text-align:center;">&#9679;</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -106,66 +273,61 @@
   <section class="section">
     <div class="container">
       <p class="section-label text-center">FLOW</p>
-      <h2 class="section-title text-center">導入の流れ</h2>
+      <h2 class="section-title text-center">導入ステップ</h2>
+      <p class="section-desc text-center">段階的にAI活用を深められます。</p>
       <div class="flow-steps" style="margin-top:48px;">
-        <div class="flow-step"><h4>無料AI診断</h4><p>業務課題のヒアリング、AI適用可能業務の特定、ROI試算。</p></div>
-        <div class="flow-step"><h4>要件定義</h4><p>対象業務の選定、権限設計、成果指標の合意。</p></div>
-        <div class="flow-step"><h4>環境構築</h4><p>VAIZO AI基盤の設定、業務ルール実装、テスト環境準備。</p></div>
-        <div class="flow-step"><h4>PoC・調整</h4><p>実業務での試験運用、精度調整、フィードバック反映。</p></div>
-        <div class="flow-step"><h4>本番運用</h4><p>社内展開、研修、効果測定、月次改善サイクル開始。</p></div>
+        <div class="flow-step"><h4>無料相談</h4><p>御社の課題をヒアリング。最適なプランをご提案。</p></div>
+        <div class="flow-step"><h4>AI経営顧問</h4><p>初月無料。まず情報収集と相談から開始。</p></div>
+        <div class="flow-step"><h4>AI導入・伴走</h4><p>AIツール導入、業務AI化を毎月1件実装。</p></div>
+        <div class="flow-step"><h4>AI部門化</h4><p>専用環境構築、全社展開、継続改善。</p></div>
       </div>
     </div>
   </section>
 
-  <!-- PRICING -->
-  <section class="section section-gray">
-    <div class="container">
-      <p class="section-label text-center">PRICING</p>
-      <h2 class="section-title text-center">料金プラン</h2>
-      <div class="pricing-grid" style="margin-top:48px;">
-        <div class="pricing-card" style="background:#fff;">
-          <div class="pricing-name">LIGHT</div>
-          <div class="pricing-price">30<span>万円</span></div>
-          <div class="pricing-unit">初期費用（税別）</div>
-          <ul class="pricing-features">
-            <li>業務ヒアリング</li><li>環境構築</li><li>1業務の自動化</li><li>基本ルール整備</li><li>使い方レクチャー</li><li>30日レビュー</li>
-          </ul>
-          <a href="/contact/" class="btn btn-outline btn-full">相談する</a>
+  <!-- FAQ -->
+  <section class="section section-gray" id="faq">
+    <div class="container narrow">
+      <p class="section-label text-center">FAQ</p>
+      <h2 class="section-title text-center">よくある質問</h2>
+      <div style="margin-top:48px;">
+        <div class="faq-item open">
+          <div class="faq-q">エントリープランだけでも意味がありますか？<span class="faq-q-toggle">+</span></div>
+          <div class="faq-a">はい。AI活用の最新動向を毎月レポートし、御社に合った活用アイデアを提案します。「何ができるかわからない」状態を解消し、導入の判断材料を得るだけでも大きな価値があります。</div>
         </div>
-        <div class="pricing-card pricing-card-popular">
-          <div class="pricing-badge">RECOMMENDED</div>
-          <div class="pricing-name">STANDARD</div>
-          <div class="pricing-price">50<span>万円</span></div>
-          <div class="pricing-unit">初期費用（税別）</div>
-          <ul class="pricing-features">
-            <li>LIGHTの全機能</li><li>権限・承認フロー設計</li><li>複数業務フロー対応</li><li>VAIZO AI管理画面</li><li>社内研修（2回）</li><li>60日運用サポート</li>
-          </ul>
-          <a href="/contact/" class="btn btn-white btn-full">相談する</a>
+        <div class="faq-item">
+          <div class="faq-q">途中でプランを変更できますか？<span class="faq-q-toggle">+</span></div>
+          <div class="faq-a">はい、いつでもアップグレード可能です。エントリーで情報収集→スタンダードで導入→プレミアムで全社展開と、段階的に進めるのが最も成功率の高いパターンです。</div>
         </div>
-        <div class="pricing-card" style="background:#fff;">
-          <div class="pricing-name">ENTERPRISE</div>
-          <div class="pricing-price">100<span>万円〜</span></div>
-          <div class="pricing-unit">初期費用（税別）</div>
-          <ul class="pricing-features">
-            <li>STANDARDの全機能</li><li>部門横断ワークフロー</li><li>カスタムUI開発</li><li>セキュリティ監査対応</li><li>社内展開支援</li><li>90日運用サポート</li>
-          </ul>
-          <a href="/contact/" class="btn btn-outline btn-full">相談する</a>
+        <div class="faq-item">
+          <div class="faq-q">AIの知識がまったくなくても大丈夫ですか？<span class="faq-q-toggle">+</span></div>
+          <div class="faq-a">もちろんです。むしろそういう方のためのサービスです。技術の話はすべて参謀が引き受けます。経営者は「何を実現したいか」だけ考えてください。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">ChatGPTを既に使っていますが、それとの違いは？<span class="faq-q-toggle">+</span></div>
+          <div class="faq-a">ChatGPTは「聞いたら答える」ツールです。SANBO AIは「業務を前に進める仕組み」を構築します。エージェント型AIで、ファイル操作・外部ツール連携・業務フロー自動化まで実現します。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">補助金は使えますか？<span class="faq-q-toggle">+</span></div>
+          <div class="faq-a">AI導入補助金の対象になるケースがあります。申請サポートも行っておりますので、お気軽にご相談ください。</div>
         </div>
       </div>
-      <p class="text-center" style="margin-top:24px; font-size:13px; color:#999;">※ AI導入補助金の活用が可能です。</p>
     </div>
   </section>
 
+  <!-- CTA -->
   <section class="cta-section">
     <div class="container">
-      <div class="cta-title">御社の業務、どこからAI化する？</div>
-      <p class="cta-desc">無料AI診断で、最もROIの高い業務を特定します。</p>
-      <a href="/contact/diagnosis.html" class="btn btn-white">無料AI診断に申し込む</a>
+      <div class="cta-title">経営者がAIに悩む時代は、<br>終わりにしましょう。</div>
+      <p class="cta-desc">まずは無料相談から。30分のオンライン面談で、御社に最適なAI活用プランをご提案します。</p>
+      <div class="btn-group" style="justify-content:center;">
+        <a href="/contact/" class="btn btn-white">無料で相談する</a>
+        <a href="/contact/diagnosis.html" class="btn btn-white-outline">無料AI診断を受ける</a>
+      </div>
     </div>
   </section>
 
-  <footer class="footer"><div class="container"><div class="footer-inner"><div><div class="footer-logo">VAIZO</div><p class="footer-desc">AIで、業務が前に進む会社へ。</p></div><div><div class="footer-heading">サービス</div><ul class="footer-links"><li><a href="/service/web.html">Web制作事業</a></li><li><a href="/service/ai-implementation.html">AI導入支援</a></li><li><a href="/service/ai-advisor.html">AI顧問</a></li><li><a href="/service/ai-education.html">AI教育支援</a></li></ul></div><div><div class="footer-heading">会社情報</div><ul class="footer-links"><li><a href="/about.html">会社概要</a></li><li><a href="/case/">導入事例</a></li><li><a href="/news/">お知らせ</a></li></ul></div><div><div class="footer-heading">サポート</div><ul class="footer-links"><li><a href="/contact/">お問い合わせ</a></li><li><a href="/privacy.html">プライバシーポリシー</a></li><li><a href="/legal.html">特定商取引法表記</a></li></ul></div></div><div class="footer-bottom"><span>&copy; 2026 VAIZO Inc.</span><span>AI で業務が前に進む会社へ</span></div></div></footer>
+  <footer class="footer"><div class="container"><div class="footer-inner"><div><div class="footer-logo">VAIZO</div><p class="footer-desc">AIで、業務が前に進む会社へ。</p></div><div><div class="footer-heading">サービス</div><ul class="footer-links"><li><a href="/service/web.html">Web制作事業</a></li><li><a href="/service/ai-implementation.html">SANBO AI</a></li><li><a href="/service/ai-advisor.html">AI顧問</a></li><li><a href="/service/ai-education.html">AI教育支援</a></li></ul></div><div><div class="footer-heading">会社情報</div><ul class="footer-links"><li><a href="/about.html">会社概要</a></li><li><a href="/case/">導入事例</a></li><li><a href="/news/">お知らせ</a></li></ul></div><div><div class="footer-heading">サポート</div><ul class="footer-links"><li><a href="/contact/">お問い合わせ</a></li><li><a href="/privacy.html">プライバシーポリシー</a></li><li><a href="/legal.html">特定商取引法表記</a></li></ul></div></div><div class="footer-bottom"><span>&copy; 2026 VAIZO Inc.</span><span>AI で業務が前に進む会社へ</span></div></div></footer>
   <script src="/main.js"></script>
-  <script src="/stars-animation.js"></script>
+  <script src="/hero-animation.js"></script>
 </body>
 </html>

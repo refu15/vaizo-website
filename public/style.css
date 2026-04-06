@@ -283,6 +283,29 @@ img { max-width: 100%; }
 .faq-item.open .faq-a { display: block; }
 .faq-item.open .faq-q-toggle { transform: rotate(45deg); }
 
+/* ========== LP ========== */
+.lp-fail-box { border: 1px solid #555; padding: 40px 32px 32px; position: relative; margin-bottom: 0; }
+.lp-fail-label { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #111; padding: 4px 20px; font-size: 12px; font-weight: 700; color: #ccc; letter-spacing: 0.1em; white-space: nowrap; }
+.lp-fail-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.lp-fail-list li { font-size: 14px; color: #aaa; padding-left: 20px; position: relative; }
+.lp-fail-list li::before { content: '\2717'; position: absolute; left: 0; color: #666; }
+
+.lp-solution-box { border: 2px solid #fff; padding: 40px 32px 32px; position: relative; }
+.lp-solution-label { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #fff; color: #111; padding: 4px 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; white-space: nowrap; }
+
+.lp-reasons { max-width: 800px; margin: 48px auto 0; }
+.lp-reason { display: flex; gap: 32px; padding: 40px 0; border-bottom: 1px solid #eee; }
+.lp-reason:last-child { border-bottom: none; }
+.lp-reason-num { font-size: 64px; font-weight: 900; color: #eee; line-height: 1; flex-shrink: 0; }
+.lp-reason-content h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+.lp-reason-content p { font-size: 14px; color: #666; line-height: 1.8; }
+
+@media (max-width: 768px) {
+  .lp-fail-list { grid-template-columns: 1fr; }
+  .lp-reason { flex-direction: column; gap: 12px; }
+  .lp-reason-num { font-size: 48px; }
+}
+
 /* ========== PARTNER ========== */
 .partner-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; max-width: 900px; margin: 0 auto; }
 .partner-card {
