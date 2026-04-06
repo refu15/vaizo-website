@@ -385,6 +385,37 @@ img { max-width: 100%; }
 .legal-content ul { margin: 0 0 16px 24px; }
 .legal-content li { font-size: 14px; color: #444; line-height: 1.8; margin-bottom: 4px; }
 
+/* ========== RECRUIT ========== */
+.card-grid-5 { grid-template-columns: repeat(5, 1fr); }
+.recruit-mission-split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.recruit-mission-left .section-title { margin-bottom: 16px; }
+.recruit-mission-left .section-desc { max-width: none; }
+.recruit-mission-right p { font-size: 15px; color: #444; line-height: 2; margin-bottom: 24px; }
+.recruit-mission-right strong { color: #111; }
+
+.recruit-culture-grid { display: flex; flex-direction: column; gap: 0; margin-top: 32px; }
+.recruit-culture-item { display: flex; gap: 24px; padding: 24px 0; border-bottom: 1px solid #ddd; }
+.recruit-culture-label { font-size: 13px; font-weight: 700; color: #111; min-width: 140px; flex-shrink: 0; letter-spacing: 0.05em; padding-top: 2px; }
+.recruit-culture-text { font-size: 14px; color: #666; line-height: 1.8; }
+
+.recruit-positions { display: flex; flex-direction: column; gap: 24px; margin-top: 16px; }
+.recruit-position { border: 1px solid #333; }
+.recruit-position-header { padding: 24px 32px 0; }
+.recruit-position-tag { font-size: 11px; letter-spacing: 0.1em; color: #888; display: inline-block; margin-bottom: 8px; }
+.recruit-position-title { font-size: 20px; font-weight: 700; color: #fff; }
+.recruit-position-body { padding: 16px 32px 24px; }
+.recruit-position-body p { font-size: 14px; color: #aaa; line-height: 1.8; margin-bottom: 16px; }
+.recruit-position-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.recruit-position-tags span { font-size: 11px; padding: 4px 12px; border: 1px solid #444; color: #888; }
+
+@media (max-width: 768px) {
+  .card-grid-5 { grid-template-columns: 1fr; }
+  .recruit-mission-split { grid-template-columns: 1fr; gap: 32px; }
+  .recruit-culture-item { flex-direction: column; gap: 8px; }
+  .recruit-culture-label { min-width: auto; }
+  .recruit-position-header, .recruit-position-body { padding-left: 20px; padding-right: 20px; }
+}
+
 /* ========== FOOTER ========== */
 .footer { background: #111; color: #fff; padding: 64px 0 32px; }
 .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
