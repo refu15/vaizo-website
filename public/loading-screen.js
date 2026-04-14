@@ -115,6 +115,7 @@
         screen.classList.add('fade-out');
         setTimeout(function() {
           screen.style.display = 'none';
+          document.body.classList.add('loaded');
         }, 800);
         return false;
       }
