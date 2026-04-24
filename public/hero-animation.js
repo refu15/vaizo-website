@@ -1,6 +1,5 @@
 (function() {
   'use strict';
-
   var canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
   var ctx = canvas.getContext('2d');
@@ -11,7 +10,6 @@
   var pulses = [];
   var mouse = { x: -9999, y: -9999 };
   var frame = 0;
-
   var CONFIG = {
     nodeCount: 80,
     connectionDist: 160,
@@ -21,7 +19,6 @@
     gridCols: 6,
     gridRows: 4
   };
-
   function resize() {
     var rect = canvas.parentElement.getBoundingClientRect();
     w = rect.width;
@@ -32,8 +29,6 @@
     canvas.style.height = h + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
-
-  // Floating node
   function createNode(x, y, type) {
     return {
       x: x || Math.random() * w,
@@ -46,8 +41,6 @@
       phase: Math.random() * Math.PI * 2
     };
   }
-
-  // Data pulse traveling along a connection
   function createPulse(fromNode, toNode) {
     return {
       from: fromNode,
@@ -57,12 +50,9 @@
       opacity: 0.8
     };
   }
-
   function init() {
     resize();
     nodes = [];
-
-    // Grid anchor nodes
     for (var row = 0; row < CONFIG.gridRows; row++) {
       for (var col = 0; col < CONFIG.gridCols; col++) {
         var gx = (w * 0.15) + (col / (CONFIG.gridCols - 1)) * (w * 0.7);
@@ -72,25 +62,16 @@
         nodes.push(createNode(gx, gy, 'anchor'));
       }
     }
-
-    // Floating nodes
     for (var i = 0; i < CONFIG.nodeCount; i++) {
       nodes.push(createNode(null, null, 'float'));
     }
   }
-
   function updateNodes() {
     for (var i = 0; i < nodes.length; i++) {
       var n = nodes[i];
-
-      // Movement
       n.x += n.vx;
       n.y += n.vy;
-
-      // Breathing
       n.phase += 0.01;
-
-      // Mouse repulsion
       var dx = n.x - mouse.x;
       var dy = n.y - mouse.y;
       var dist = Math.sqrt(dx * dx + dy * dy);
@@ -99,18 +80,12 @@
         n.vx += (dx / dist) * force;
         n.vy += (dy / dist) * force;
       }
-
-      // Damping
       n.vx *= 0.99;
       n.vy *= 0.99;
-
-      // Boundary wrapping
       if (n.x < -20) n.x = w + 20;
       if (n.x > w + 20) n.x = -20;
       if (n.y < -20) n.y = h + 20;
       if (n.y > h + 20) n.y = -20;
-
-      // Anchor drift speed limit
       if (n.type === 'anchor') {
         var speed = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
         if (speed > 0.15) {
@@ -120,10 +95,8 @@
       }
     }
   }
-
   function spawnPulses() {
     if (frame % CONFIG.pulseInterval !== 0) return;
-    // Pick random connected pair
     for (var attempt = 0; attempt < 5; attempt++) {
       var a = nodes[Math.floor(Math.random() * nodes.length)];
       var b = nodes[Math.floor(Math.random() * nodes.length)];
@@ -136,12 +109,10 @@
       }
     }
   }
-
   function updatePulses() {
     for (var i = pulses.length - 1; i >= 0; i--) {
       pulses[i].t += pulses[i].speed;
       if (pulses[i].t > 1) {
-        // Chain reaction: sometimes spawn a new pulse from arrival
         if (Math.random() < 0.3) {
           var endNode = pulses[i].to;
           for (var j = 0; j < nodes.length; j++) {
@@ -158,7 +129,6 @@
       }
     }
   }
-
   function drawConnections() {
     for (var i = 0; i < nodes.length; i++) {
       for (var j = i + 1; j < nodes.length; j++) {
@@ -177,62 +147,48 @@
       }
     }
   }
-
   function drawNodes() {
     for (var i = 0; i < nodes.length; i++) {
       var n = nodes[i];
       var breath = Math.sin(n.phase) * 0.15;
       var r = n.radius * (1 + breath);
       var alpha = n.opacity + breath * 0.2;
-
-      // Glow
       if (n.type === 'anchor') {
         ctx.beginPath();
         ctx.arc(n.x, n.y, r * 4, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(255,255,255,0.03)';
         ctx.fill();
       }
-
-      // Core dot
       ctx.beginPath();
       ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(255,255,255,' + alpha + ')';
       ctx.fill();
     }
   }
-
   function drawPulses() {
     for (var i = 0; i < pulses.length; i++) {
       var p = pulses[i];
       var x = p.from.x + (p.to.x - p.from.x) * p.t;
       var y = p.from.y + (p.to.y - p.from.y) * p.t;
       var alpha = p.opacity * (1 - Math.abs(p.t - 0.5) * 2) * 0.8;
-
-      // Trail
       var trailLen = 0.15;
       var tx = p.from.x + (p.to.x - p.from.x) * Math.max(0, p.t - trailLen);
       var ty = p.from.y + (p.to.y - p.from.y) * Math.max(0, p.t - trailLen);
-
       var grad = ctx.createLinearGradient(tx, ty, x, y);
       grad.addColorStop(0, 'rgba(255,255,255,0)');
       grad.addColorStop(1, 'rgba(255,255,255,' + alpha + ')');
-
       ctx.beginPath();
       ctx.moveTo(tx, ty);
       ctx.lineTo(x, y);
       ctx.strokeStyle = grad;
       ctx.lineWidth = 1.5;
       ctx.stroke();
-
-      // Head glow
       ctx.beginPath();
       ctx.arc(x, y, 3, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(255,255,255,' + (alpha * 0.6) + ')';
       ctx.fill();
     }
   }
-
-  // Horizontal scan line
   function drawScanLine() {
     var scanY = (frame * 0.5) % (h + 40) - 20;
     var grad = ctx.createLinearGradient(0, scanY - 20, 0, scanY + 20);
@@ -242,12 +198,8 @@
     ctx.fillStyle = grad;
     ctx.fillRect(0, scanY - 20, w, 40);
   }
-
-  // Geometric accent shapes
   function drawAccents() {
     var time = frame * 0.005;
-
-    // Rotating hexagon (top right)
     ctx.save();
     ctx.translate(w * 0.82, h * 0.25);
     ctx.rotate(time * 0.3);
@@ -265,8 +217,6 @@
     ctx.lineWidth = 1;
     ctx.stroke();
     ctx.restore();
-
-    // Concentric circles (bottom left)
     ctx.save();
     ctx.translate(w * 0.12, h * 0.75);
     for (var j = 1; j <= 3; j++) {
@@ -278,8 +228,6 @@
       ctx.stroke();
     }
     ctx.restore();
-
-    // Floating cross (center-right)
     ctx.save();
     ctx.translate(w * 0.7, h * 0.6);
     ctx.rotate(time * 0.2);
@@ -292,40 +240,31 @@
     ctx.stroke();
     ctx.restore();
   }
-
   function draw() {
     ctx.clearRect(0, 0, w, h);
-
     drawAccents();
     drawScanLine();
     drawConnections();
     drawPulses();
     drawNodes();
-
     updateNodes();
     updatePulses();
     spawnPulses();
-
     frame++;
     requestAnimationFrame(draw);
   }
-
-  // Events
   canvas.addEventListener('mousemove', function(e) {
     var rect = canvas.getBoundingClientRect();
     mouse.x = e.clientX - rect.left;
     mouse.y = e.clientY - rect.top;
   });
-
   canvas.addEventListener('mouseleave', function() {
     mouse.x = -9999;
     mouse.y = -9999;
   });
-
   window.addEventListener('resize', function() {
     resize();
   });
-
   init();
   draw();
 })();
